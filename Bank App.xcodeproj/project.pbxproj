@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		745BFFA92F799D3C00D68BE6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 745BFFA82F799D3C00D68BE6 /* Lottie */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		749878E02F792F6D00FABDB5 /* Bank App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -21,12 +25,27 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		74497D7E2F7AF3E2001613B3 /* LogInScreen */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LogInScreen;
+			sourceTree = "<group>";
+		};
 		749878E22F792F6D00FABDB5 /* Bank App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				749878F22F792F6F00FABDB5 /* Exceptions for "Bank App" folder in "Bank App" target */,
 			);
 			path = "Bank App";
+			sourceTree = "<group>";
+		};
+		749878FA2F794E8B00FABDB5 /* OnBoardingScreen */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = OnBoardingScreen;
+			sourceTree = "<group>";
+		};
+		749879042F799AB600FABDB5 /* assets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -36,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				745BFFA92F799D3C00D68BE6 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,7 +66,10 @@
 			isa = PBXGroup;
 			children = (
 				749878E22F792F6D00FABDB5 /* Bank App */,
+				749879042F799AB600FABDB5 /* assets */,
+				749878FA2F794E8B00FABDB5 /* OnBoardingScreen */,
 				749878E12F792F6D00FABDB5 /* Products */,
+				74497D7E2F7AF3E2001613B3 /* LogInScreen */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,10 +97,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				74497D7E2F7AF3E2001613B3 /* LogInScreen */,
 				749878E22F792F6D00FABDB5 /* Bank App */,
+				749878FA2F794E8B00FABDB5 /* OnBoardingScreen */,
+				749879042F799AB600FABDB5 /* assets */,
 			);
 			name = "Bank App";
 			packageProductDependencies = (
+				745BFFA82F799D3C00D68BE6 /* Lottie */,
 			);
 			productName = "Bank App";
 			productReference = 749878E02F792F6D00FABDB5 /* Bank App.app */;
@@ -107,6 +134,9 @@
 			);
 			mainGroup = 749878D72F792F6D00FABDB5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				745BFFA72F799D3C00D68BE6 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 749878E12F792F6D00FABDB5 /* Products */;
 			projectDirPath = "";
@@ -150,9 +180,7 @@
 				INFOPLIST_FILE = "Bank App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -182,9 +210,7 @@
 				INFOPLIST_FILE = "Bank App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -345,6 +371,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		745BFFA72F799D3C00D68BE6 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		745BFFA82F799D3C00D68BE6 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 745BFFA72F799D3C00D68BE6 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 749878D82F792F6D00FABDB5 /* Project object */;
 }
