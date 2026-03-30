@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74497E482F7B050B001613B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74497E472F7B050B001613B3 /* ViewController.swift */; };
 		745BFFA92F799D3C00D68BE6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 745BFFA82F799D3C00D68BE6 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		74497E472F7B050B001613B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		749878E02F792F6D00FABDB5 /* Bank App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -70,6 +72,7 @@
 				749878FA2F794E8B00FABDB5 /* OnBoardingScreen */,
 				749878E12F792F6D00FABDB5 /* Products */,
 				74497D7E2F7AF3E2001613B3 /* LogInScreen */,
+				74497E472F7B050B001613B3 /* ViewController.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74497E482F7B050B001613B3 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

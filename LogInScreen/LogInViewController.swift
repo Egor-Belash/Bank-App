@@ -12,12 +12,27 @@ final class LogInViewController: UIViewController {
     // MARK: – Properties
     
     // MARK: – Subviews
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "imageBackground1")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Log In"
+        label.text = "Bank App"
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.textColor = .black
         return label
+    }()
+    
+    private let logInView: LogInView = {
+        let view = LogInView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     // MARK: – Lifecycles
@@ -35,14 +50,52 @@ final class LogInViewController: UIViewController {
     }
     
     private func setupSubviews() {
+        logInView.delegate = self
+        
+        view.addSubview(imageView)
         view.addSubview(label)
+        view.addSubview(logInView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            logInView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 50),
+            logInView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            logInView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            logInView.heightAnchor.constraint(equalToConstant: 400),
         ])
+    }
+    
+}
+
+extension LogInViewController: LogInViewDelegate {
+    func loginButtonTaped(login: String, password: String) {
+        if password == "" || login == "" {
+            showAlert(title: "Ошибка", message: "Неверный логин или пароль")
+        } else {
+            let vc = ViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+            
+            
+        }
+    }
+            
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ок", style: .default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
     
 }

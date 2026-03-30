@@ -66,6 +66,10 @@ final class OnBoardingViewController: UIViewController {
         
     }
     
+    deinit {
+        print("close onboadr")
+    }
+    
     // MARK: – Layout
     private func setupViewProperties() {
         view.backgroundColor = .systemBackground
