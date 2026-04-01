@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74497E482F7B050B001613B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74497E472F7B050B001613B3 /* ViewController.swift */; };
+		74218F162F7DA38100FB754A /* Extension+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74218F152F7DA38100FB754A /* Extension+VC.swift */; };
 		745BFFA92F799D3C00D68BE6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 745BFFA82F799D3C00D68BE6 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		74497E472F7B050B001613B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		74218F152F7DA38100FB754A /* Extension+VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+VC.swift"; sourceTree = "<group>"; };
 		749878E02F792F6D00FABDB5 /* Bank App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -27,6 +27,16 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		74218F0B2F7D897C00FB754A /* RegistrationScreen */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RegistrationScreen;
+			sourceTree = "<group>";
+		};
+		74218F0D2F7D9FAC00FB754A /* TabBar */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		74497D7E2F7AF3E2001613B3 /* LogInScreen */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = LogInScreen;
@@ -72,7 +82,9 @@
 				749878FA2F794E8B00FABDB5 /* OnBoardingScreen */,
 				749878E12F792F6D00FABDB5 /* Products */,
 				74497D7E2F7AF3E2001613B3 /* LogInScreen */,
-				74497E472F7B050B001613B3 /* ViewController.swift */,
+				74218F0B2F7D897C00FB754A /* RegistrationScreen */,
+				74218F0D2F7D9FAC00FB754A /* TabBar */,
+				74218F152F7DA38100FB754A /* Extension+VC.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +112,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				74218F0B2F7D897C00FB754A /* RegistrationScreen */,
+				74218F0D2F7D9FAC00FB754A /* TabBar */,
 				74497D7E2F7AF3E2001613B3 /* LogInScreen */,
 				749878E22F792F6D00FABDB5 /* Bank App */,
 				749878FA2F794E8B00FABDB5 /* OnBoardingScreen */,
@@ -165,7 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74497E482F7B050B001613B3 /* ViewController.swift in Sources */,
+				74218F162F7DA38100FB754A /* Extension+VC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

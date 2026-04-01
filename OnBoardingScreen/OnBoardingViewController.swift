@@ -46,6 +46,7 @@ final class OnBoardingViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
@@ -54,6 +55,7 @@ final class OnBoardingViewController: UIViewController {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = UIColor(named: "yellowColor2")
         pageControl.pageIndicatorTintColor = .systemGray
+        pageControl.isUserInteractionEnabled = false
         return pageControl
     }()
 
@@ -67,7 +69,7 @@ final class OnBoardingViewController: UIViewController {
     }
     
     deinit {
-        print("close onboadr")
+        print("OndoardingVC is deinit")
     }
     
     // MARK: – Layout
@@ -157,7 +159,6 @@ extension OnBoardingViewController: OnBoardingCellDelegate {
         let nextIndex = currentIndex + 1
         
         if nextIndex < slides.count {   // для первых экранов
-            print(currentIndex)
             collectionView.scrollToItem(at: IndexPath(item: nextIndex, section: 0), at: .top, animated: true)
             pageControl.currentPage = nextIndex         // обновляем чтобы по нажатию на кнопку тоже работал
         } else {                        // для последнего экрана

@@ -1,13 +1,12 @@
 //
-//  ViewController.swift
+//  SettingsViewController.swift
 //  Bank App
 //
-//  Created by Egor on 30.03.2026.
+//  Created by Egor on 01.04.2026.
 //
-
 import UIKit
 
-final class ViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     
     // MARK: – Properties
     
@@ -15,7 +14,7 @@ final class ViewController: UIViewController {
     private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Hello, World!"
+        label.text = "Settings"
         return label
     }()
     
@@ -30,7 +29,7 @@ final class ViewController: UIViewController {
     
     // MARK: – Layout
     private func setupViewProperties() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGray
     }
     
     private func setupSubviews() {
@@ -45,3 +44,4 @@ final class ViewController: UIViewController {
     }
     
 }
+
