@@ -9,6 +9,8 @@ import UIKit
 
 protocol LogInViewDelegate: AnyObject {
     func loginButtonTaped(login: String, password: String)
+    
+    func registrationButtonTaped()
 }
 
 final class LogInView: UIView {
@@ -56,9 +58,30 @@ final class LogInView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Войти", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor(named: "yellowColor2")
+        button.layer.cornerRadius = 25
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowRadius = 10
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowOffset = .init(width: 2, height: 2)
         return button
     }()
     
+    private let registrationButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Регистрация", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor(named: "blueColor2")
+        button.layer.cornerRadius = 25
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowRadius = 10
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowOffset = .init(width: 2, height: 2)
+        return button
+    }()
     
     // MARK: – INIT
     override init(frame: CGRect) {
@@ -74,8 +97,7 @@ final class LogInView: UIView {
     
     // MARK: – Layout
     private func setupViewProperties() {
-        backgroundColor = .white
-        alpha = 0.9
+        backgroundColor = UIColor.white.withAlphaComponent(0.9)
         layer.cornerRadius = 20
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.4
@@ -90,12 +112,14 @@ final class LogInView: UIView {
         passwordTextField.delegate = self
         
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        registrationButton.addTarget(self, action: #selector(registratioinButtonTapped), for: .touchUpInside)
         
         addSubview(loginLabel)
         addSubview(loginTextField)
         addSubview(passwordLabel)
         addSubview(passwordTextField)
         addSubview(loginButton)
+        addSubview(registrationButton)
     }
     
     private func setupConstraints() {
@@ -117,9 +141,14 @@ final class LogInView: UIView {
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
-            loginButton.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            loginButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            loginButton.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: 50),
+            loginButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: -50),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            registrationButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
+            registrationButton.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: 50),
+            registrationButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: -50),
+            registrationButton.heightAnchor.constraint(equalToConstant: 50),
 
         ])
     }
@@ -130,6 +159,10 @@ final class LogInView: UIView {
               let login = loginTextField.text
         else { return }
         delegate?.loginButtonTaped(login: login, password: password)
+    }
+    
+    @objc private func registratioinButtonTapped() {
+        delegate?.registrationButtonTaped()
     }
     
 }

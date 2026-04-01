@@ -79,23 +79,18 @@ final class LogInViewController: UIViewController {
 extension LogInViewController: LogInViewDelegate {
     func loginButtonTaped(login: String, password: String) {
         if password == "" || login == "" {
-            showAlert(title: "Ошибка", message: "Неверный логин или пароль")
+            showSimpleAlert(title: "Ошибка", message: "Неверный логин или пароль")
         } else {
-            let vc = ViewController()
+            let vc = MainTabBarViewController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
-            
-            
         }
     }
-            
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "Ок", style: .default)
-        
-        alert.addAction(okAction)
-        present(alert, animated: true)
+    
+    func registrationButtonTaped() {
+        let vc = RegistrationViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
     }
     
 }
