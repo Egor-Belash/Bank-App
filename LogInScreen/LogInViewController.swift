@@ -10,6 +10,8 @@ import UIKit
 final class LogInViewController: UIViewController {
     
     // MARK: – Properties
+    private let savedLogin = ""
+    private let savedPassword = ""
     
     // MARK: – Subviews
     private let imageView: UIImageView = {
@@ -78,12 +80,18 @@ final class LogInViewController: UIViewController {
 
 extension LogInViewController: LogInViewDelegate {
     func loginButtonTaped(login: String, password: String) {
-        if password == "" || login == "" {
-            showSimpleAlert(title: "Ошибка", message: "Неверный логин или пароль")
-        } else {
+        guard let savedLogin = UserDefaults.standard.string(forKey: "login"),
+           let savedPassword = UserDefaults.standard.string(forKey: "password") else {
+            return
+        }
+        print(savedLogin)
+        print(savedPassword)
+        if login == savedLogin && password == savedPassword {
             let vc = MainTabBarViewController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
+        } else {
+            showSimpleAlert(title: "Ошибка", message: "Неверный логин или пароль")
         }
     }
     

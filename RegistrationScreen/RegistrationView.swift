@@ -1,22 +1,15 @@
 //
-//  LogInViewDelegate.swift
+//  RegistrationView.swift
 //  Bank App
 //
 //  Created by Egor on 01.04.2026.
-//
-
-
-//
-//  LogInView.swift
-//  Bank App
-//
-//  Created by Egor on 30.03.2026.
 //
 
 import UIKit
 
 protocol RegistrationViewDelegate: AnyObject {
     func saveButtonTapped()
+    func showError(title: String, message: String)
 }
 
 final class RegistrationView: UIView {
@@ -242,7 +235,45 @@ final class RegistrationView: UIView {
     
     // MARK: – Actions
     @objc private func saveButtonTapped() {
+        guard checkIfPasswordsAreEqual() else { return }
+    
+        saveData()
         delegate?.saveButtonTapped()
+    }
+    
+    private func saveData() {
+        if let login = loginTextField.text, !login.isEmpty {
+            UserDefaults.standard.set(login, forKey: "login")
+        }
+        
+        if let password = passwordTextField.text, !password.isEmpty {
+            UserDefaults.standard.set(password, forKey: "password")
+        }
+        
+        if let name = nameTextField.text, !name.isEmpty {
+            UserDefaults.standard.set(name, forKey: "name")
+        }
+    }
+    
+    private func checkIfPasswordsAreEqual() -> Bool {
+        guard let password = passwordTextField.text,
+              let secondPassword = secondPasswordTextField.text else { return false }
+        
+        if password.isEmpty || secondPassword.isEmpty {
+            passwordTextField.backgroundColor = .red
+            secondPasswordTextField.backgroundColor = .red
+            delegate?.showError(title: "Ошибка", message: "Поля должны быть заполнены")
+            return false
+        }
+        
+        if password != secondPassword {
+            secondPasswordTextField.backgroundColor = .red
+            delegate?.showError(title: "Ошибка", message: "Пароли должны совпадать")
+            return false
+        } else {
+            secondPasswordTextField.backgroundColor = .systemBackground
+        }
+        return true
     }
     
 }

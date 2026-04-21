@@ -10,6 +10,7 @@ import UIKit
 final class ViewController: UIViewController {
     
     // MARK: – Properties
+    private let userName = UserDefaults.standard.string(forKey: "name")
     
     // MARK: – Subviews
     private let label: UILabel = {
@@ -34,6 +35,7 @@ final class ViewController: UIViewController {
     }
     
     private func setupSubviews() {
+        label.text = "Hello, \(userName ?? "")"
         view.addSubview(label)
     }
     

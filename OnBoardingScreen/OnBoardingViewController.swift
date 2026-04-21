@@ -173,8 +173,7 @@ extension OnBoardingViewController: OnBoardingCellDelegate {
               let sceneDelegate = windowScene.delegate as? SceneDelegate,
               let window = sceneDelegate.window
         else { return }
-        
-        window.backgroundColor = .systemBackground
+    
         window.rootViewController = vc
         
         UIView.transition(

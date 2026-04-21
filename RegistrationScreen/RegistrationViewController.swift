@@ -99,7 +99,12 @@ final class RegistrationViewController: UIViewController {
     }
 }
 
+// MARK: – RegistrationViewDelegate
 extension RegistrationViewController: RegistrationViewDelegate {
+    func showError(title: String, message: String) {
+        showSimpleAlert(title: title, message: message)
+    }
+    
     func saveButtonTapped() {
         self.dismiss(animated: true)
     }
