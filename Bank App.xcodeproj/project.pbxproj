@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		74218F162F7DA38100FB754A /* Extension+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74218F152F7DA38100FB754A /* Extension+VC.swift */; };
 		745BFFA92F799D3C00D68BE6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 745BFFA82F799D3C00D68BE6 /* Lottie */; };
+		74D6ACEF2F9BD1E200EF191E /* tz_mini_app.md in Resources */ = {isa = PBXBuildFile; fileRef = 74D6ACEE2F9BD1E200EF191E /* tz_mini_app.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		74218F152F7DA38100FB754A /* Extension+VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+VC.swift"; sourceTree = "<group>"; };
 		749878E02F792F6D00FABDB5 /* Bank App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74D6ACEE2F9BD1E200EF191E /* tz_mini_app.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = tz_mini_app.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -77,6 +79,7 @@
 		749878D72F792F6D00FABDB5 = {
 			isa = PBXGroup;
 			children = (
+				74D6ACEE2F9BD1E200EF191E /* tz_mini_app.md */,
 				749878E22F792F6D00FABDB5 /* Bank App */,
 				749879042F799AB600FABDB5 /* assets */,
 				749878FA2F794E8B00FABDB5 /* OnBoardingScreen */,
@@ -169,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74D6ACEF2F9BD1E200EF191E /* tz_mini_app.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

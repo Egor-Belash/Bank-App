@@ -21,7 +21,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
-        window?.rootViewController = LogInViewController()
+        
+        let onBoardingIsDone = UserDefaults.standard.bool(forKey: "onboardingIsDone")
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        
+        if onBoardingIsDone {
+            if isLoggedIn {
+                window?.rootViewController = MainTabBarViewController()
+            } else {
+                window?.rootViewController = LogInViewController()
+            }
+        } else {
+            window?.rootViewController = OnBoardingViewController()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

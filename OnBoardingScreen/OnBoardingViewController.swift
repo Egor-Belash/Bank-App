@@ -33,6 +33,14 @@ final class OnBoardingViewController: UIViewController {
             buttonTitle: "ОГО!",
             buttonColor: UIColor(named: "blueColor2")!
         ),
+        CellModel(
+            mainTitle: "Начните прямо сейчас!",
+            animationName: "OnlineMoneyTransfer",
+            title: "Больше денег у вас – меньше денег у вас",
+            buttonTitle: "Начать",
+            buttonColor: UIColor(named: "yellowColor2")!
+        ),
+
     ]
     
     // MARK: – Subviews
@@ -65,7 +73,6 @@ final class OnBoardingViewController: UIViewController {
         setupViewProperties()
         setupSubviews()
         setupConstraints()
-        
     }
     
     deinit {
@@ -108,8 +115,6 @@ final class OnBoardingViewController: UIViewController {
         pageControl.numberOfPages = slides.count
         let angle = CGFloat.pi/2
         pageControl.transform = CGAffineTransform(rotationAngle: angle)
-        
-
     }
     
 }
@@ -167,6 +172,10 @@ extension OnBoardingViewController: OnBoardingCellDelegate {
     }
     
     private func goToLogInScreen() {
+        // Showing onboarding once
+        UserDefaults.standard.set(true, forKey: "onboardingIsDone")
+        
+        // Go to the LogInVC
         let vc = LogInViewController()
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

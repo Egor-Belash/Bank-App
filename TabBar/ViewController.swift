@@ -35,7 +35,7 @@ final class ViewController: UIViewController {
     }
     
     private func setupSubviews() {
-        label.text = "Hello, \(userName ?? "")"
+        label.text = "Hello, \(userName ?? "User")"
         view.addSubview(label)
     }
     

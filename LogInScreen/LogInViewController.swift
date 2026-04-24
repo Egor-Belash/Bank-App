@@ -43,7 +43,10 @@ final class LogInViewController: UIViewController {
         setupViewProperties()
         setupSubviews()
         setupConstraints()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        logInView.cleanTextFields()
     }
     
     // MARK: – Layout
@@ -79,14 +82,25 @@ final class LogInViewController: UIViewController {
 }
 
 extension LogInViewController: LogInViewDelegate {
+    
     func loginButtonTaped(login: String, password: String) {
+        guard !login.isEmpty, !password.isEmpty else {
+            showSimpleAlert(title: "Ошибка", message: "Введите логин и пароль")
+            return
+        }
+        
         guard let savedLogin = UserDefaults.standard.string(forKey: "login"),
            let savedPassword = UserDefaults.standard.string(forKey: "password") else {
+            showSimpleAlert(title: "Ошибка", message: "Пользователь не зарегистрирован")
             return
         }
         print(savedLogin)
         print(savedPassword)
         if login == savedLogin && password == savedPassword {
+            // If user us LoggedIn, he will be loggedIn directly to the MainTabBarViewController
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            
+            // Go to the MainTabBarViewController
             let vc = MainTabBarViewController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)

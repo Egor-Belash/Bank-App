@@ -165,6 +165,11 @@ final class LogInView: UIView {
         delegate?.registrationButtonTaped()
     }
     
+    func cleanTextFields() {
+        loginTextField.text = nil
+        passwordTextField.text = nil
+    }
+    
 }
 
 // MARK: – UITextFieldDelegate
