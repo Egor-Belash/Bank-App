@@ -73,6 +73,8 @@ final class OnBoardingViewController: UIViewController {
         setupViewProperties()
         setupSubviews()
         setupConstraints()
+        
+        overrideUserInterfaceStyle = .light
     }
     
     deinit {

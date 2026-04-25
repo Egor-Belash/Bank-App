@@ -43,6 +43,8 @@ final class LogInViewController: UIViewController {
         setupViewProperties()
         setupSubviews()
         setupConstraints()
+        
+        overrideUserInterfaceStyle = .light
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -54,6 +54,7 @@ final class RegistrationViewController: UIViewController {
         setupConstraints()
         
         setupGestures()
+        overrideUserInterfaceStyle = .light
     }
     
     // MARK: – Layout
