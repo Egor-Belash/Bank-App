@@ -16,6 +16,7 @@ final class RegistrationView: UIView {
     
     // MARK: – Properties
     weak var delegate: RegistrationViewDelegate?
+    private let savedLogin = ""
     
     // MARK: – Subviews
     private let scrollView: UIScrollView = {
@@ -101,14 +102,6 @@ final class RegistrationView: UIView {
         return textField
     }()
     
-    private let saveButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Сохранить", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        return button
-    }()
-    
     private let dateOfBirthLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -121,11 +114,54 @@ final class RegistrationView: UIView {
         let picker = UIDatePicker()
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.datePickerMode = .date
-        picker.preferredDatePickerStyle = .wheels
+        picker.preferredDatePickerStyle = .compact
         picker.date = Date()
         return picker
     }()
     
+    private let phoneNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Введите номер мобильного телефона"
+        label.textColor = .black
+        return label
+    }()
+    
+    private let phoneNumberTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = .roundedRect
+        textField.placeholder = "Телефон"
+//        textField.keyboardType = 
+        textField.returnKeyType = .continue
+        return textField
+    }()
+    
+    private let emailLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Введите электронную почту"
+        label.textColor = .black
+        return label
+    }()
+    
+    private let emailTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = .roundedRect
+        textField.placeholder = "Элекронная почта"
+        textField.keyboardType = .emailAddress
+        textField.returnKeyType = .done
+        return textField
+    }()
+
+    private let saveButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Сохранить", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
+    }()
     
     // MARK: – INIT
     override init(frame: CGRect) {
@@ -169,7 +205,11 @@ final class RegistrationView: UIView {
         contentView.addSubview(nameTextField)
         contentView.addSubview(dateOfBirthLabel)
         contentView.addSubview(datePicker)
+        contentView.addSubview(phoneNumberLabel)
+        contentView.addSubview(phoneNumberTextField)
         contentView.addSubview(saveButton)
+        contentView.addSubview(emailLabel)
+        contentView.addSubview(emailTextField)
         
         scrollView.addSubview(contentView)
         addSubview(scrollView)
@@ -184,9 +224,9 @@ final class RegistrationView: UIView {
             
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -15),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, constant: -15),
             
             loginLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             loginLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -223,11 +263,27 @@ final class RegistrationView: UIView {
             dateOfBirthLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 30),
             dateOfBirthLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
-            datePicker.topAnchor.constraint(equalTo: dateOfBirthLabel.bottomAnchor, constant: 5),
+            datePicker.topAnchor.constraint(equalTo: dateOfBirthLabel.bottomAnchor, constant: 20),
             datePicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            datePicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            datePicker.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            saveButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 30),
+            phoneNumberLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 30),
+            phoneNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            
+            phoneNumberTextField.topAnchor.constraint(equalTo: phoneNumberLabel.bottomAnchor, constant: 5),
+            phoneNumberTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            phoneNumberTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            phoneNumberTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            emailLabel.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 30),
+            emailLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            
+            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5),
+            emailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            emailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            saveButton.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 30),
             saveButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             saveButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
         ])
@@ -235,7 +291,7 @@ final class RegistrationView: UIView {
     
     // MARK: – Actions
     @objc private func saveButtonTapped() {
-        guard checkIfPasswordsAreEqual() else { return }
+        guard checkIfRequiredFieldsAreFilled() else { print(111); return }
     
         saveData()
         delegate?.saveButtonTapped()
@@ -253,16 +309,27 @@ final class RegistrationView: UIView {
         if let name = nameTextField.text, !name.isEmpty {
             UserDefaults.standard.set(name, forKey: "name")
         }
+        
+        if let phone = phoneNumberTextField.text, !phone.isEmpty {
+            UserDefaults.standard.set(phone, forKey: "phone")
+        }
+        
+        if let email = emailTextField.text, !email.isEmpty {
+            UserDefaults.standard.set(email, forKey: "email")
+        }
     }
     
-    private func checkIfPasswordsAreEqual() -> Bool {
+    private func checkIfRequiredFieldsAreFilled() -> Bool {
         guard let password = passwordTextField.text,
-              let secondPassword = secondPasswordTextField.text else { return false }
+              let secondPassword = secondPasswordTextField.text,
+              let account = loginTextField.text
+        else { return false }
         
-        if password.isEmpty || secondPassword.isEmpty {
+        if password.isEmpty || secondPassword.isEmpty || account.isEmpty {
+            loginTextField.backgroundColor = .red
             passwordTextField.backgroundColor = .red
             secondPasswordTextField.backgroundColor = .red
-            delegate?.showError(title: "Ошибка", message: "Поля должны быть заполнены")
+            delegate?.showError(title: "Ошибка", message: "Обязателные поля должны быть заполнены")
             return false
         }
         
@@ -273,11 +340,21 @@ final class RegistrationView: UIView {
         } else {
             secondPasswordTextField.backgroundColor = .systemBackground
         }
+        
+        // Проверка на уникальность логина
+        let savedLogin = UserDefaults.standard.string(forKey: "login")
+        if account == savedLogin {
+            loginTextField.backgroundColor = .red
+            delegate?.showError(title: "Ошибка", message: "Пользователь с таким логином уже существует")
+            return false
+        }
+        
         return true
     }
     
 }
 
+// MARK: – UITextFieldDelegate
 extension RegistrationView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
@@ -289,9 +366,18 @@ extension RegistrationView: UITextFieldDelegate {
             nameTextField.becomeFirstResponder()
         case nameTextField:
             nameTextField.resignFirstResponder()
+            
+        case phoneNumberTextField:
+            emailTextField.becomeFirstResponder()
+        case emailTextField:
+            emailTextField.resignFirstResponder()
         default:
             textField.resignFirstResponder()
         }
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.backgroundColor = .systemBackground
     }
 }

@@ -78,9 +78,10 @@ final class LogInViewController: UIViewController {
             logInView.heightAnchor.constraint(equalToConstant: 400),
         ])
     }
-    
+
 }
 
+// MARK: – LogInViewDelegate
 extension LogInViewController: LogInViewDelegate {
     
     func loginButtonTaped(login: String, password: String) {

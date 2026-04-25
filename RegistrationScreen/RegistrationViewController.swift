@@ -53,6 +53,7 @@ final class RegistrationViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         
+        setupGestures()
     }
     
     // MARK: – Layout
@@ -96,6 +97,16 @@ final class RegistrationViewController: UIViewController {
     // MARK: – Actions
     @objc private func exitButtonTapped() {
         dismiss(animated: true)
+    }
+    
+    // скрытие клавиатуры по тапу в любой части экрана
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
     }
 }
 
