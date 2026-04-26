@@ -92,13 +92,21 @@ extension LogInViewController: LogInViewDelegate {
             return
         }
         
-        guard let savedLogin = UserDefaults.standard.string(forKey: "login"),
-           let savedPassword = UserDefaults.standard.string(forKey: "password") else {
+        guard let savedLogin = UserDefaults.standard.string(forKey: "login") else {
             showSimpleAlert(title: "Ошибка", message: "Пользователь не зарегистрирован")
             return
         }
+        
+        guard let savedPassword = KeychainService.shared.loadPasswordFromKeychain(login: savedLogin) else {
+            showSimpleAlert(title: "Ошибка", message: "Пароль не найден")
+            return
+        }
+        
+        
+
+//           let savedPassword = UserDefaults.standard.string(forKey: "password")
         print(savedLogin)
-        print(savedPassword)
+//        print(savedPassword)
         if login == savedLogin && password == savedPassword {
             // If user us LoggedIn, he will be loggedIn directly to the MainTabBarViewController
             UserDefaults.standard.set(true, forKey: "isLoggedIn")

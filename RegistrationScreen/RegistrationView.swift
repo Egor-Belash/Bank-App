@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Security
 
 protocol RegistrationViewDelegate: AnyObject {
     func saveButtonTapped()
@@ -291,21 +292,26 @@ final class RegistrationView: UIView {
     
     // MARK: – Actions
     @objc private func saveButtonTapped() {
-        guard checkIfRequiredFieldsAreFilled() else { print(111); return }
+        guard checkIfRequiredFieldsAreFilled() else { return }
     
         saveData()
         delegate?.saveButtonTapped()
     }
     
     private func saveData() {
-        if let login = loginTextField.text, !login.isEmpty {
-            UserDefaults.standard.set(login, forKey: "login")
-        }
+        guard let login = loginTextField.text, !login.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty
+        else { return }
         
-        if let password = passwordTextField.text, !password.isEmpty {
-            UserDefaults.standard.set(password, forKey: "password")
-        }
+        UserDefaults.standard.set(login, forKey: "login")
         
+        KeychainService.shared.savePasswordToKeychain(login: login, password: password)
+        
+//        savePasswordToKeychain(login: login, password: password)
+        
+//        if let password = passwordTextField.text, !password.isEmpty {
+//            UserDefaults.standard.set(password, forKey: "password")
+//        }
         if let name = nameTextField.text, !name.isEmpty {
             UserDefaults.standard.set(name, forKey: "name")
         }
@@ -318,7 +324,7 @@ final class RegistrationView: UIView {
             UserDefaults.standard.set(email, forKey: "email")
         }
     }
-    
+
     private func checkIfRequiredFieldsAreFilled() -> Bool {
         guard let password = passwordTextField.text,
               let secondPassword = secondPasswordTextField.text,
