@@ -13,6 +13,8 @@ final class KeychainService {
     
     private let keychainService = "-67jygj.Bank-App"
     
+    private init() {}
+    
     func savePasswordToKeychain(login: String, password: String) {
         guard let data = password.data(using: .utf8) else { return }
         
