@@ -299,8 +299,8 @@ final class RegistrationView: UIView {
     }
     
     private func saveData() {
-        guard let login = loginTextField.text, !login.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty
+        guard let login = loginTextField.text?.trimmingCharacters(in: .whitespaces), !login.isEmpty,
+              let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces), !password.isEmpty
         else { return }
         
         UserDefaults.standard.set(login, forKey: "login")
@@ -312,23 +312,23 @@ final class RegistrationView: UIView {
 //        if let password = passwordTextField.text, !password.isEmpty {
 //            UserDefaults.standard.set(password, forKey: "password")
 //        }
-        if let name = nameTextField.text, !name.isEmpty {
+        if let name = nameTextField.text?.trimmingCharacters(in: .whitespaces), !name.isEmpty {
             UserDefaults.standard.set(name, forKey: "name")
         }
         
-        if let phone = phoneNumberTextField.text, !phone.isEmpty {
+        if let phone = phoneNumberTextField.text?.trimmingCharacters(in: .whitespaces), !phone.isEmpty {
             UserDefaults.standard.set(phone, forKey: "phone")
         }
         
-        if let email = emailTextField.text, !email.isEmpty {
+        if let email = emailTextField.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty {
             UserDefaults.standard.set(email, forKey: "email")
         }
     }
 
     private func checkIfRequiredFieldsAreFilled() -> Bool {
-        guard let password = passwordTextField.text,
-              let secondPassword = secondPasswordTextField.text,
-              let account = loginTextField.text
+        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces),
+              let secondPassword = secondPasswordTextField.text?.trimmingCharacters(in: .whitespaces),
+              let account = loginTextField.text?.trimmingCharacters(in: .whitespaces)
         else { return false }
         
         if password.isEmpty || secondPassword.isEmpty || account.isEmpty {

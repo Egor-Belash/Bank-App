@@ -155,8 +155,8 @@ final class LogInView: UIView {
     
     // MARK: – Actions
     @objc private func loginButtonTapped() {
-        guard let password = passwordTextField.text,
-              let login = loginTextField.text
+        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces),
+              let login = loginTextField.text?.trimmingCharacters(in: .whitespaces)
         else { return }
         delegate?.loginButtonTaped(login: login, password: password)
     }

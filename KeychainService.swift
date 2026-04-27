@@ -24,12 +24,11 @@ final class KeychainService {
         
         SecItemDelete(deleteQuery as CFDictionary)
 
-        
         let query: [String: Any] = [
             kSecClass as String:        kSecClassGenericPassword,
             kSecAttrService as String:  keychainService,
             kSecAttrAccount as String:  login,
-            kSecValueData as String: data
+            kSecValueData as String:    data
         ]
         
         let status = SecItemAdd(query as CFDictionary, nil)
