@@ -50,8 +50,7 @@ final class NetworkService {
         session = URLSession(configuration: configuration)
     }
     
-    // MARK: – GCD подход (Completion Handler)
-    
+    // MARK: – Курсы валют (GCD подход (Completion Handler))
     func fetchExchangeRates(completion: @escaping (Result<[ExchangeRatesModel], NetworkError>) -> Void) {
         guard let url = URL(string: "\(baseURL)/kurs_cards") else {
             completion(.failure(.invalidURL))
@@ -88,6 +87,45 @@ final class NetworkService {
             }
         }
         
+        task.resume()
+    }
+    
+    // MARK: – News (GCD подход (Completion Handler))
+    func fetchNews(completion: @escaping (Result<[NewsModel], NetworkError>) -> Void) {
+        guard let url = URL(string: "\(baseURL)/news_info?lang=ru") else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        let task = session.dataTask(with: url) { data, response, error in
+            if let error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(.httpError(statusCode: httpResponse.statusCode)))
+                return
+            }
+            
+            guard let data else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let news = try decoder.decode([NewsModel].self, from: data)
+                completion(.success(news))
+            } catch {
+                completion(.failure(.decodingError(error)))
+            }
+        }
         task.resume()
     }
 }
