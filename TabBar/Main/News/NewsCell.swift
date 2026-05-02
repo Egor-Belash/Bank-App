@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class NewsCell: UITableViewCell {
     
@@ -97,19 +98,11 @@ final class NewsCell: UITableViewCell {
             dateLabel.text = formatter.string(from: date)
         }
         
-        // отображение url фото
+        // отображение url фото с помощью Kingfisher
         guard let url = URL(string: model.img) else { return }
         
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image.image = image
-                    }
-                }
-            }
-            
-        }
+        image.kf.setImage(with: url)
+        
     }
     
 }

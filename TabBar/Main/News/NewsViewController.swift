@@ -13,6 +13,14 @@ final class NewsViewController: UIViewController {
     private var news: [NewsModel] = []
 
     // MARK: – Subviews
+    private let mainTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.text = "Новости"
+        return label
+    }()
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +43,18 @@ final class NewsViewController: UIViewController {
         return label
     }()
     
+    private let reloadButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
+        button.setTitle("Try again", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        button.layer.cornerRadius = 25
+        button.isHidden = true
+        return button
+    }()
+    
     // MARK: – Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +74,20 @@ final class NewsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(NewsCell.self, forCellReuseIdentifier: NewsCell.reuseIdentifier)
+        reloadButton.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
         
+        view.addSubview(mainTitleLabel)
         view.addSubview(tableView)
         view.addSubview(activityIndicator)
         view.addSubview(label)
+        view.addSubview(reloadButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            mainTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -40),
+            mainTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -72,6 +98,11 @@ final class NewsViewController: UIViewController {
             
             label.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 10),
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            reloadButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
+            reloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reloadButton.widthAnchor.constraint(equalToConstant: 100),
+            reloadButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
@@ -87,13 +118,25 @@ final class NewsViewController: UIViewController {
                 case .success(let news):
                     self?.news = news
                     self?.tableView.reloadData()
-                    print(news)
                 case .failure(let error):
                     self?.label.text = "Failed to fetch data:\n\(error.localizedDescription)"
+                    self?.showReloadButton()
                 }
             }
         }
     }
+    
+    private func showReloadButton() {
+        label.isHidden = false
+        reloadButton.isHidden = false
+    }
+    
+    @objc private func reloadButtonTapped() {
+        fetchNews()
+        reloadButton.isHidden = true
+        label.isHidden = true
+    }
+    
 }
 
 // MARK: – UITableViewDataSource

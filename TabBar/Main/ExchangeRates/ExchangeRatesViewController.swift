@@ -28,6 +28,18 @@ final class ExchangeRatesViewController: UIViewController {
         return label
     }()
     
+    private let reloadButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
+        button.setTitle("Try again", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        button.layer.cornerRadius = 25
+        button.isHidden = true
+        return button
+    }()
+    
     // MARK: – Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +58,11 @@ final class ExchangeRatesViewController: UIViewController {
     
     private func setupSubviews() {
         setupTextIntoLabel()
+        reloadButton.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
         
         view.addSubview(activityIndicator)
         view.addSubview(label)
+        view.addSubview(reloadButton)
     }
     
     private func setupConstraints() {
@@ -60,6 +74,10 @@ final class ExchangeRatesViewController: UIViewController {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
+            reloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reloadButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            reloadButton.widthAnchor.constraint(equalToConstant: 100),
+            reloadButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
@@ -76,13 +94,15 @@ final class ExchangeRatesViewController: UIViewController {
                     self?.rates = rates
                     self?.setupTextIntoLabel()
                 case .failure(let error):
-                    self?.label.text = "Failed to fetch data:\n\(error.localizedDescription)"
+                    self?.label.text = "Failed to fetch data\n\(error.localizedDescription)"
+                    self?.showReloadButton()
                 }
             }
         }
     }
     
     private func setupTextIntoLabel() {
+        label.isHidden = false
         guard let rate = rates.first else {
             label.text = "Загрузка ..."
             return
@@ -110,6 +130,17 @@ final class ExchangeRatesViewController: UIViewController {
         🇨🇳CNY–🇪🇺EUR:        \(rate.cnyEurCardIn)        \(rate.cnyEurCardOut)
         🇨🇳CNY–🇷🇺RUB:        \(rate.cnyRubCardIn)        \(rate.cnyRubCardOut)
         """
+    }
+    
+    private func showReloadButton() {
+        label.isHidden = false
+        reloadButton.isHidden = false
+    }
+    
+    @objc private func reloadButtonTapped() {
+        fetchExchangeRates()
+        reloadButton.isHidden = true
+        label.isHidden = true
     }
     
 }

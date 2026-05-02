@@ -43,8 +43,8 @@ final class NetworkService {
     // MARK: – INIT
     private init() {
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 30
-        configuration.timeoutIntervalForResource = 60
+        configuration.timeoutIntervalForRequest = 5
+        configuration.timeoutIntervalForResource = 10
         configuration.waitsForConnectivity = true
         
         session = URLSession(configuration: configuration)

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		74218F162F7DA38100FB754A /* Extension+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74218F152F7DA38100FB754A /* Extension+VC.swift */; };
 		745BFFA92F799D3C00D68BE6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 745BFFA82F799D3C00D68BE6 /* Lottie */; };
+		746FF8B22FA6088100C3C58F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 746FF8B12FA6088100C3C58F /* Kingfisher */; };
 		74D6ACEF2F9BD1E200EF191E /* tz_mini_app.md in Resources */ = {isa = PBXBuildFile; fileRef = 74D6ACEE2F9BD1E200EF191E /* tz_mini_app.md */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				746FF8B22FA6088100C3C58F /* Kingfisher in Frameworks */,
 				745BFFA92F799D3C00D68BE6 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +134,7 @@
 			name = "Bank App";
 			packageProductDependencies = (
 				745BFFA82F799D3C00D68BE6 /* Lottie */,
+				746FF8B12FA6088100C3C58F /* Kingfisher */,
 			);
 			productName = "Bank App";
 			productReference = 749878E02F792F6D00FABDB5 /* Bank App.app */;
@@ -163,6 +166,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				745BFFA72F799D3C00D68BE6 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				746FF8B02FA6088100C3C58F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 749878E12F792F6D00FABDB5 /* Products */;
@@ -412,6 +416,14 @@
 				minimumVersion = 4.6.0;
 			};
 		};
+		746FF8B02FA6088100C3C58F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.8.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -419,6 +431,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 745BFFA72F799D3C00D68BE6 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		746FF8B12FA6088100C3C58F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 746FF8B02FA6088100C3C58F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
