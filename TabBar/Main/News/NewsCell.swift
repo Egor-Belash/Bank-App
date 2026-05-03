@@ -21,6 +21,7 @@ final class NewsCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 3
         label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .black
         return label
     }()
     
@@ -36,6 +37,7 @@ final class NewsCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textColor = .secondaryLabel
+        label.textColor = .black
         return label
     }()
     

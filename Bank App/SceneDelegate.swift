@@ -34,6 +34,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             window?.rootViewController = OnBoardingViewController()
         }
+        
+        let themeValue = UserDefaults.standard.integer(forKey: "theme")
+        let theme = AppTheme(rawValue: themeValue) ?? .system
+        
+        ThemeManager.applyTheme(theme)
+        
+        
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
