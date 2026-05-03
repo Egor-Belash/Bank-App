@@ -57,6 +57,8 @@ final class ViewController: UIViewController {
         setupViewProperties()
         setupSubviews()
         setupConstraints()
+        
+        showNotificationRequest()
     }
     
     // MARK: – Layout
@@ -107,4 +109,17 @@ final class ViewController: UIViewController {
         return userName ?? "User"
     }
     
+    private func showNotificationRequest() {
+        NotificationService.shared.requestPermission { granted in
+            if granted {
+                UserDefaults.standard.set(true, forKey: "notifications")
+                NotificationService.shared.scheduleNotification()
+                print("✅ Разрешение получено")
+            } else {
+                UserDefaults.standard.set(false, forKey: "notifications")
+                print("❌ Пользователь отказал")
+            }
+        }
+    }
 }
+

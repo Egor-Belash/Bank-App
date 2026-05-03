@@ -33,6 +33,21 @@ final class SettingsViewController: UIViewController {
         return segment
     }()
     
+    private let notificationsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Disable notifications:"
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        return label
+    }()
+    
+    private let notificationSwitch: UISwitch = {
+        let switcher = UISwitch()
+        switcher.translatesAutoresizingMaskIntoConstraints = false
+        switcher.isOn = false
+        return switcher
+    }()
+    
     private let logOutButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +73,7 @@ final class SettingsViewController: UIViewController {
         setupNavigationBar()
         
         loadThemeValue()
+        loadNotificationsValue()
     }
     
     // MARK: – Layout
@@ -68,10 +84,13 @@ final class SettingsViewController: UIViewController {
     private func setupSubviews() {
         logOutButton.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
         nightModeSegment.addTarget(self, action: #selector(nightModeSegmentChanged), for: .valueChanged)
+        notificationSwitch.addTarget(self, action: #selector(notificationSwitchTapped), for: .valueChanged)
         
         view.addSubview(label)
         view.addSubview(nightModeLabel)
         view.addSubview(nightModeSegment)
+        view.addSubview(notificationsLabel)
+        view.addSubview(notificationSwitch)
         view.addSubview(logOutButton)
     }
     
@@ -87,6 +106,14 @@ final class SettingsViewController: UIViewController {
             nightModeSegment.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             nightModeSegment.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             nightModeSegment.heightAnchor.constraint(equalToConstant: 34),
+            nightModeSegment.widthAnchor.constraint(equalToConstant: 200),
+            
+            notificationsLabel.centerYAnchor.constraint(equalTo: notificationSwitch.centerYAnchor),
+            notificationsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            notificationsLabel.trailingAnchor.constraint(equalTo: notificationSwitch.leadingAnchor, constant: -20),
+            
+            notificationSwitch.topAnchor.constraint(equalTo: nightModeSegment.bottomAnchor, constant: 30),
+            notificationSwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
             logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logOutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
@@ -120,6 +147,58 @@ final class SettingsViewController: UIViewController {
         let theme = AppTheme(rawValue: themeValue) ?? .system
         
         nightModeSegment.selectedSegmentIndex = theme.rawValue
+    }
+    
+    @objc private func notificationSwitchTapped(_ sender: UISwitch) {
+        if sender.isOn {
+            NotificationService.shared.requestPermission { granted in
+                if granted {
+                    self.notificationsLabel.text = "Disable notifications"
+                    UserDefaults.standard.set(true, forKey: "notifications")
+                    NotificationService.shared.scheduleNotification()
+                } else {
+                    self.notificationsLabel.text = "Enable notifications"
+                    sender.setOn(false, animated: true)
+                    UserDefaults.standard.set(false, forKey: "notifications")
+                    
+                    self.showAlertToOpenSettings()
+                }
+            }
+        } else {
+            notificationsLabel.text = "Enable notifications"
+            UserDefaults.standard.set(false, forKey: "notifications")
+            NotificationService.shared.cancelNotifications()
+        }
+            
+    }
+    
+    private func loadNotificationsValue() {
+        let value = UserDefaults.standard.bool(forKey: "notifications")
+        notificationSwitch.isOn = value
+        if value {
+            notificationsLabel.text = "Disable notifications"
+        } else {
+            notificationsLabel.text = "Enable notifications"
+        }
+    }
+    
+    private func showAlertToOpenSettings() {
+        let alert = UIAlertController(
+            title: "Уведомления отключены",
+            message: "Разрешите уведомления в настройках устройства",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+
+        alert.addAction(UIAlertAction(title: "Настройки", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        })
+        
+        present(alert, animated: true)
+
     }
     
     private func showWarningAlertBeforeExit(title: String, message: String) {
