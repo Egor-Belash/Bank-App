@@ -11,6 +11,7 @@ final class ExchangeRatesViewController: UIViewController {
     
     // MARK: – Properties
     private var rates: [ExchangeRatesModel] = []
+    var presenter: ExchangeRatesPresenterProtocol?
     
     // MARK: – Subviews
     private let activityIndicator: UIActivityIndicatorView = {
@@ -47,7 +48,10 @@ final class ExchangeRatesViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         
-        fetchExchangeRates()
+        activityIndicator.startAnimating()
+        presenter = ExchangeRatesPresenter(view: self)
+        presenter?.viewDidLoad()
+//        fetchExchangeRates()
         
     }
     
@@ -82,24 +86,24 @@ final class ExchangeRatesViewController: UIViewController {
     }
     
     // MARK: – Actions
-    private func fetchExchangeRates() {
-        activityIndicator.startAnimating()
-        
-        NetworkService.shared.fetchExchangeRates { [weak self] result in
-            DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
-                
-                switch result {
-                case .success(let rates):
-                    self?.rates = rates
-                    self?.setupTextIntoLabel()
-                case .failure(let error):
-                    self?.label.text = "Failed to fetch data\n\(error.localizedDescription)"
-                    self?.showReloadButton()
-                }
-            }
-        }
-    }
+//    private func fetchExchangeRates() {
+//        activityIndicator.startAnimating()
+//        
+//        NetworkService.shared.fetchExchangeRates { [weak self] result in
+//            DispatchQueue.main.async {
+//                self?.activityIndicator.stopAnimating()
+//                
+//                switch result {
+//                case .success(let rates):
+//                    self?.rates = rates
+//                    self?.setupTextIntoLabel()
+//                case .failure(let error):
+//                    self?.label.text = "Failed to fetch data\n\(error.localizedDescription)"
+//                    self?.showReloadButton()
+//                }
+//            }
+//        }
+//    }
     
     private func setupTextIntoLabel() {
         label.isHidden = false
@@ -138,11 +142,33 @@ final class ExchangeRatesViewController: UIViewController {
     }
     
     @objc private func reloadButtonTapped() {
-        fetchExchangeRates()
-        reloadButton.isHidden = true
-        label.isHidden = true
+//        fetchExchangeRates()
+        showLoading()
+        presenter?.reloadTapped()
     }
     
 }
 
-
+// MARK: – ExchangeRatesViewProtocol
+extension ExchangeRatesViewController: ExchangeRatesViewProtocol {
+    func showLoading() {
+        activityIndicator.startAnimating()
+        label.isHidden = true
+        reloadButton.isHidden = true
+    }
+    
+    func showRates(_ rates: [ExchangeRatesModel]) {
+        self.rates = rates
+        activityIndicator.stopAnimating()
+        label.isHidden = false
+        setupTextIntoLabel()
+    }
+    
+    func showError(_ message: String) {
+        activityIndicator.stopAnimating()
+        label.text = message
+        showReloadButton()
+    }
+    
+    
+}
