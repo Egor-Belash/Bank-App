@@ -73,6 +73,11 @@ final class SettingsViewController: UIViewController {
         setupNavigationBar()
         
         loadThemeValue()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewwillAppear")
         loadNotificationsValue()
     }
     
@@ -126,7 +131,6 @@ final class SettingsViewController: UIViewController {
     private func setupNavigationBar() {
         title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
-        
     }
     
     // MARK: – Actions
@@ -172,13 +176,24 @@ final class SettingsViewController: UIViewController {
             
     }
     
+    // Проверка состояния разрешения уведомлений
     private func loadNotificationsValue() {
-        let value = UserDefaults.standard.bool(forKey: "notifications")
-        notificationSwitch.isOn = value
-        if value {
-            notificationsLabel.text = "Disable notifications"
-        } else {
-            notificationsLabel.text = "Enable notifications"
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            guard settings.authorizationStatus == .authorized else {
+                print("⚠️ Нет разрешения")
+                DispatchQueue.main.async {
+                    self.notificationSwitch.isOn = false
+                    self.notificationsLabel.text = "Enable notifications"
+                    UserDefaults.standard.set(false, forKey: "notifications")
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.notificationSwitch.isOn = true
+                self.notificationsLabel.text = "Disable notifications"
+                UserDefaults.standard.set(true, forKey: "notifications")
+            }
         }
     }
     
@@ -207,7 +222,20 @@ final class SettingsViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let logOutAction = UIAlertAction(title: "Log Out", style: .destructive) { [weak self] _ in
             UserDefaults.standard.set(false, forKey: "isLoggedIn")
-            self?.dismiss(animated: true)
+            
+            guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = scene.windows.first else
+            { return }
+            
+            window.rootViewController = LogInViewController()
+            
+            UIView.transition(
+                with: window,
+                duration: 0.3,
+                options: .transitionFlipFromBottom,
+                animations: nil,
+                completion: nil
+            )
         }
         
         alert.addAction(cancelAction)

@@ -45,7 +45,7 @@ final class NotificationService {
             content.badge = 1
             
             var dateComponents = DateComponents()
-            dateComponents.hour = 20
+            dateComponents.hour = 21
             dateComponents.minute = 00
             
             // Шаг 3: Создаём триггер — условие срабатывания уведомления.

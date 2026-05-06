@@ -102,19 +102,12 @@ extension LogInViewController: LogInViewDelegate {
             return
         }
         
-        
-
-//           let savedPassword = UserDefaults.standard.string(forKey: "password")
-        print(savedLogin)
-//        print(savedPassword)
         if login == savedLogin && password == savedPassword {
             // If user us LoggedIn, he will be loggedIn directly to the MainTabBarViewController
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
             
             // Go to the MainTabBarViewController
-            let vc = MainTabBarViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
+            goToMainTabBarScreen()
         } else {
             showSimpleAlert(title: "Ошибка", message: "Неверный логин или пароль")
         }
@@ -124,6 +117,22 @@ extension LogInViewController: LogInViewDelegate {
         let vc = RegistrationViewController()
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
+    }
+    
+    private func goToMainTabBarScreen() {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = scene.windows.first else
+        { return }
+        
+        window.rootViewController = MainTabBarViewController()
+        
+        UIView.transition(
+            with: window,
+            duration: 0.3,
+            options: .transitionFlipFromBottom,
+            animations: nil,
+            completion: nil
+        )
     }
     
 }

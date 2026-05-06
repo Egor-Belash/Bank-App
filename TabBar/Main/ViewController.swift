@@ -114,10 +114,10 @@ final class ViewController: UIViewController {
             if granted {
                 UserDefaults.standard.set(true, forKey: "notifications")
                 NotificationService.shared.scheduleNotification()
-                print("✅ Разрешение получено")
+                print("✅ Разрешение на уведомления получено")
             } else {
                 UserDefaults.standard.set(false, forKey: "notifications")
-                print("❌ Пользователь отказал")
+                print("❌ Пользователь отказался от получения уведомлений")
             }
         }
     }
