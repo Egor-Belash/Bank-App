@@ -175,7 +175,6 @@ final class SettingsViewController: UIViewController {
     }
     
     @objc private func appWillEnterForeground() {
-        print("App became active")
         loadNotificationsValue()
     }
     
