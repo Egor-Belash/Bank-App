@@ -69,16 +69,14 @@ final class SettingsViewController: UIViewController {
         setupViewProperties()
         setupSubviews()
         setupConstraints()
-        
         setupNavigationBar()
-        
         loadThemeValue()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("viewwillAppear")
-        loadNotificationsValue()
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: – Layout
@@ -174,6 +172,11 @@ final class SettingsViewController: UIViewController {
             NotificationService.shared.cancelNotifications()
         }
             
+    }
+    
+    @objc private func appWillEnterForeground() {
+        print("App became active")
+        loadNotificationsValue()
     }
     
     // Проверка состояния разрешения уведомлений
