@@ -44,6 +44,8 @@ final class LogInViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         
+        setupGestures()
+        
         overrideUserInterfaceStyle = .light
     }
     
@@ -79,6 +81,17 @@ final class LogInViewController: UIViewController {
             logInView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             logInView.heightAnchor.constraint(equalToConstant: 400),
         ])
+    }
+    
+    // MARK: – Actions
+    // скрытие клавиатуры по тапу в любой части экрана
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
     }
 
 }
