@@ -11,7 +11,7 @@ final class ExchangeRatesRouter: ExchangeRatesRouterProtocol {
 
     weak var viewController: UIViewController?
     
-    static func build() -> UIViewController? {
+    static func build() -> UIViewController {
         let vc = ExchangeRatesViewController()
         let presenter = ExchangeRatesPresenter()
         let router = ExchangeRatesRouter()
@@ -25,7 +25,7 @@ final class ExchangeRatesRouter: ExchangeRatesRouterProtocol {
     }
     
     func openExchangeRates() {
-        guard let vc = Self.build() else { return }
+        let vc = Self.build()
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

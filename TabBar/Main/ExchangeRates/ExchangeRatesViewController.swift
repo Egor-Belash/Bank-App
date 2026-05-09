@@ -49,10 +49,7 @@ final class ExchangeRatesViewController: UIViewController {
         setupConstraints()
         
         activityIndicator.startAnimating()
-        presenter = ExchangeRatesPresenter(view: self)
         presenter?.viewDidLoad()
-//        fetchExchangeRates()
-        
     }
     
     // MARK: – Layout
