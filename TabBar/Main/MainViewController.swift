@@ -11,6 +11,7 @@ final class MainViewController: UIViewController {
     
     // MARK: – Properties
     private let userName = ""
+    var presenter: MainPresenterProtocol?
     
     // MARK: – Subviews
     private let label: UILabel = {
@@ -58,7 +59,8 @@ final class MainViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         
-        showNotificationRequest()
+//        showNotificationRequest()
+        presenter?.viewDidLoad()
     }
     
     // MARK: – Layout
@@ -69,7 +71,6 @@ final class MainViewController: UIViewController {
     private func setupSubviews() {
         exchangeRatesButton.addTarget(self, action: #selector(exchangeRatesButtonTapped), for: .touchUpInside)
         newsButton.addTarget(self, action: #selector(newsButtonTapped), for: .touchUpInside)
-        label.text = "Hello, \(getUserName())!"
         
         view.addSubview(label)
         view.addSubview(exchangeRatesButton)
@@ -95,31 +96,36 @@ final class MainViewController: UIViewController {
     
     // MARK: – Actions
     @objc private func exchangeRatesButtonTapped() {
-        let vc = ExchangeRatesRouter.build()
-        navigationController?.pushViewController(vc, animated: true)
+        presenter?.exchangeRatesTapped()
     }
     
     @objc private func newsButtonTapped() {
-        let vc = NewsRouter.build()
-        navigationController?.pushViewController(vc, animated: true)
+        presenter?.newsTapped()
     }
     
-    private func getUserName() -> String {
-        let userName = UserDefaults.standard.string(forKey: "name")
-        return userName ?? "User"
+//    private func getUserName() -> String {
+//        let userName = UserDefaults.standard.string(forKey: "name")
+//        return userName ?? "User"
+//    }
+    
+//    private func showNotificationRequest() {
+//        NotificationService.shared.requestPermission { granted in
+//            if granted {
+//                UserDefaults.standard.set(true, forKey: "notifications")
+//                NotificationService.shared.scheduleNotification()
+//                print("✅ Разрешение на уведомления получено")
+//            } else {
+//                UserDefaults.standard.set(false, forKey: "notifications")
+//                print("❌ Пользователь отказался от получения уведомлений")
+//            }
+//        }
+//    }
+}
+
+extension MainViewController: MainViewProtocol {
+    func getUserName(name: String) {
+        label.text = "Hello, \(name)!"
     }
     
-    private func showNotificationRequest() {
-        NotificationService.shared.requestPermission { granted in
-            if granted {
-                UserDefaults.standard.set(true, forKey: "notifications")
-                NotificationService.shared.scheduleNotification()
-                print("✅ Разрешение на уведомления получено")
-            } else {
-                UserDefaults.standard.set(false, forKey: "notifications")
-                print("❌ Пользователь отказался от получения уведомлений")
-            }
-        }
-    }
 }
 

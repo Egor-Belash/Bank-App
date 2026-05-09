@@ -31,8 +31,6 @@ final class NewsPresenter: NewsPresenterProtocol {
     }
     
     func didSelectNews(_ news: NewsModel) {
-        print(router)
-        print("presenter called")
         router?.openDetailedNews(news)
     }
     

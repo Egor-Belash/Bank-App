@@ -1,5 +1,5 @@
 //
-//  NewsRouter.swift
+//  MainRouter.swift
 //  Bank App
 //
 //  Created by Egor on 09.05.2026.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-final class NewsRouter: NewsRouterProtocol {
+final class MainRouter: MainRouterProtocol {
     
     weak var viewController: UIViewController?
     
     static func build() -> UIViewController {
-        let vc = NewsViewController()
-        let presenter = NewsPresenter()
-        let router = NewsRouter()
+        let vc = MainViewController()
+        let presenter = MainPresenter()
+        let router = MainRouter()
         
         presenter.view = vc
         presenter.router = router
@@ -24,14 +24,13 @@ final class NewsRouter: NewsRouterProtocol {
         return vc
     }
     
+    func openExchangeRates() {
+        let vc = ExchangeRatesRouter.build()
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func openNews() {
-        let vc = Self.build()
+        let vc = NewsRouter.build()
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    func openDetailedNews(_ news: NewsModel) {
-        let vc = DetailedNewsViewController(news: news)
-        viewController?.navigationController?.pushViewController(vc, animated: true)
-    }
-    
 }
