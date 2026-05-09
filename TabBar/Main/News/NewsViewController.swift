@@ -11,6 +11,7 @@ final class NewsViewController: UIViewController {
     
     // MARK: – Properties
     private var news: [NewsModel] = []
+    var presenter: NewsPresenterProtocol?
 
     // MARK: – Subviews
     private let mainTitleLabel: UILabel = {
@@ -62,7 +63,8 @@ final class NewsViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         
-        fetchNews()
+        activityIndicator.startAnimating()
+        presenter?.viewDidLoad()
     }
     
     // MARK: – Layout
@@ -107,34 +109,13 @@ final class NewsViewController: UIViewController {
     }
     
     // MARK: – Actions
-    private func fetchNews() {
-        activityIndicator.startAnimating()
-        
-        NetworkService.shared.fetchNews { [weak self] result in
-            DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
-                
-                switch result {
-                case .success(let news):
-                    self?.news = news
-                    self?.tableView.reloadData()
-                case .failure(let error):
-                    self?.label.text = "Failed to fetch data:\n\(error.localizedDescription)"
-                    self?.showReloadButton()
-                }
-            }
-        }
-    }
-    
     private func showReloadButton() {
         label.isHidden = false
         reloadButton.isHidden = false
     }
     
     @objc private func reloadButtonTapped() {
-        fetchNews()
-        reloadButton.isHidden = true
-        label.isHidden = true
+        presenter?.reloadTapped()
     }
     
 }
@@ -163,11 +144,34 @@ extension NewsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = OpenNewsViewController(news: news[indexPath.row])
-        navigationController?.pushViewController(vc, animated: true)
+        presenter?.didSelectNews(news[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
     }
+}
+
+// MARK: – NewsViewProtocol
+extension NewsViewController: NewsViewProtocol {
+    func showLoading() {
+        activityIndicator.startAnimating()
+        label.isHidden = true
+        reloadButton.isHidden = true
+    }
+    
+    func showNews(_ news: [NewsModel]) {
+        self.news = news
+        activityIndicator.stopAnimating()
+        label.isHidden = false
+        tableView.reloadData()
+    }
+    
+    func showError(_ message: String) {
+        activityIndicator.stopAnimating()
+        label.text = message
+        showReloadButton()
+    }
+    
+    
 }

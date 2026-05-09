@@ -95,12 +95,12 @@ final class MainViewController: UIViewController {
     
     // MARK: – Actions
     @objc private func exchangeRatesButtonTapped() {
-        let vc = ExchangeRatesViewController()
+        let vc = ExchangeRatesRouter.build()
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func newsButtonTapped() {
-        let vc = NewsViewController()
+        let vc = NewsRouter.build()
         navigationController?.pushViewController(vc, animated: true)
     }
     
