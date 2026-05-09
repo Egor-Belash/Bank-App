@@ -142,8 +142,6 @@ final class ExchangeRatesViewController: UIViewController {
     }
     
     @objc private func reloadButtonTapped() {
-//        fetchExchangeRates()
-        showLoading()
         presenter?.reloadTapped()
     }
     

@@ -23,6 +23,7 @@ final class ExchangeRatesPresenter: ExchangeRatesPresenterProtocol {
     }
     
     func reloadTapped() {
+        self.view?.showLoading()
         fetchRates()
     }
     
