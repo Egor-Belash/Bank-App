@@ -9,6 +9,7 @@ import UIKit
 final class SettingsViewController: UIViewController {
     
     // MARK: – Properties
+    var presenter: SettingsPresenterProtocol?
     
     // MARK: – Subviews
     private let label: UILabel = {
@@ -36,7 +37,7 @@ final class SettingsViewController: UIViewController {
     private let notificationsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Disable notifications:"
+        label.text = "Enable notifications:"
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
@@ -70,13 +71,8 @@ final class SettingsViewController: UIViewController {
         setupSubviews()
         setupConstraints()
         setupNavigationBar()
-        loadThemeValue()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        presenter?.viewDidLoad()
     }
     
     // MARK: – Layout
@@ -137,69 +133,44 @@ final class SettingsViewController: UIViewController {
     }
     
     @objc private func nightModeSegmentChanged(_ segment: UISegmentedControl) {
-        let selectedTheme = AppTheme(rawValue: segment.selectedSegmentIndex) ?? .system
-        
-        UserDefaults.standard.set(selectedTheme.rawValue, forKey: "theme")
-        
-        ThemeManager.applyTheme(selectedTheme)
-    }
-    
-    private func loadThemeValue() {
-        let themeValue = UserDefaults.standard.integer(forKey: "theme")
-        let theme = AppTheme(rawValue: themeValue) ?? .system
-        
-        nightModeSegment.selectedSegmentIndex = theme.rawValue
+        presenter?.nightModeSegmentTapped(segment.selectedSegmentIndex)
     }
     
     @objc private func notificationSwitchTapped(_ sender: UISwitch) {
-        if sender.isOn {
-            NotificationService.shared.requestPermission { granted in
-                if granted {
-                    self.notificationsLabel.text = "Disable notifications"
-                    UserDefaults.standard.set(true, forKey: "notifications")
-                    NotificationService.shared.scheduleNotification()
-                } else {
-                    self.notificationsLabel.text = "Enable notifications"
-                    sender.setOn(false, animated: true)
-                    UserDefaults.standard.set(false, forKey: "notifications")
-                    
-                    self.showAlertToOpenSettings()
-                }
-            }
-        } else {
-            notificationsLabel.text = "Enable notifications"
-            UserDefaults.standard.set(false, forKey: "notifications")
-            NotificationService.shared.cancelNotifications()
+        presenter?.notificationSwitchTapped(sender.isOn)
+    }
+    
+    private func showWarningAlertBeforeExit(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let logOutAction = UIAlertAction(title: "Log Out", style: .destructive) { [weak self] _ in
+            self?.presenter?.logoutButtonTapped()
         }
-            
+        
+        alert.addAction(cancelAction)
+        alert.addAction(logOutAction)
+        
+        present(alert, animated: true)
     }
     
-    @objc private func appWillEnterForeground() {
-        loadNotificationsValue()
+}
+
+// MARK: – SettingsViewProtocol
+extension SettingsViewController: SettingsViewProtocol {
+    func loadThemeValue(_ value: Int) {
+        nightModeSegment.selectedSegmentIndex = value
     }
     
-    // Проверка состояния разрешения уведомлений
-    private func loadNotificationsValue() {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            guard settings.authorizationStatus == .authorized else {
-                print("⚠️ Нет разрешения")
-                DispatchQueue.main.async {
-                    self.notificationSwitch.isOn = false
-                    self.notificationsLabel.text = "Enable notifications"
-                    UserDefaults.standard.set(false, forKey: "notifications")
-                }
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.notificationSwitch.isOn = true
-                self.notificationsLabel.text = "Disable notifications"
-                UserDefaults.standard.set(true, forKey: "notifications")
-            }
-        }
+    func setTextForNotification(_ text: String) {
+        notificationsLabel.text = text
     }
     
-    private func showAlertToOpenSettings() {
+    func setSwitchIsOn(_ isOn: Bool) {
+        notificationSwitch.setOn(isOn, animated: true)
+    }
+    
+    func showAlertToOpenSettings() {
         let alert = UIAlertController(
             title: "Уведомления отключены",
             message: "Разрешите уведомления в настройках устройства",
@@ -217,34 +188,5 @@ final class SettingsViewController: UIViewController {
         present(alert, animated: true)
 
     }
-    
-    private func showWarningAlertBeforeExit(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let logOutAction = UIAlertAction(title: "Log Out", style: .destructive) { [weak self] _ in
-            UserDefaults.standard.set(false, forKey: "isLoggedIn")
-            
-            guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let window = scene.windows.first else
-            { return }
-            
-            window.rootViewController = LogInViewController()
-            
-            UIView.transition(
-                with: window,
-                duration: 0.3,
-                options: .transitionFlipFromBottom,
-                animations: nil,
-                completion: nil
-            )
-        }
-        
-        alert.addAction(cancelAction)
-        alert.addAction(logOutAction)
-        
-        present(alert, animated: true)
-    }
-    
-}
 
+}
