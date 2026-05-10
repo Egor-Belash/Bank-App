@@ -15,7 +15,7 @@ final class MainTabBarViewController: UITabBarController {
     
     private func setupTabs() {
         let mainVC = MainRouter.build()
-        let settingsVC = SettingsViewController()
+        let settingsVC = SettingsRouter.build()
         let mainNavVC = UINavigationController(rootViewController: mainVC)
         let settingsNavVC = UINavigationController(rootViewController: settingsVC)
         

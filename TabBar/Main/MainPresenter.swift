@@ -36,7 +36,13 @@ final class MainPresenter: MainPresenterProtocol {
     }
     
     private func showNotificationRequest() {
+        let didAsk = UserDefaults.standard.bool(forKey: "didAskNotificationsPermission")
+        
+        guard didAsk == false else { return }
+        
         NotificationService.shared.requestPermission { granted in
+            UserDefaults.standard.set(true, forKey: "didAskNotificationsPermission")
+            
             if granted {
                 UserDefaults.standard.set(true, forKey: "notifications")
                 NotificationService.shared.scheduleNotification()
