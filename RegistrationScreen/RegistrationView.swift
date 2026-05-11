@@ -133,7 +133,6 @@ final class RegistrationView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.placeholder = "Телефон"
-//        textField.keyboardType = 
         textField.returnKeyType = .continue
         return textField
     }()
@@ -307,11 +306,6 @@ final class RegistrationView: UIView {
         
         KeychainService.shared.savePasswordToKeychain(login: login, password: password)
         
-//        savePasswordToKeychain(login: login, password: password)
-        
-//        if let password = passwordTextField.text, !password.isEmpty {
-//            UserDefaults.standard.set(password, forKey: "password")
-//        }
         if let name = nameTextField.text?.trimmingCharacters(in: .whitespaces), !name.isEmpty {
             UserDefaults.standard.set(name, forKey: "name")
         }

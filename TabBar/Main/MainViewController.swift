@@ -58,8 +58,7 @@ final class MainViewController: UIViewController {
         setupViewProperties()
         setupSubviews()
         setupConstraints()
-        
-//        showNotificationRequest()
+
         presenter?.viewDidLoad()
     }
     
@@ -103,23 +102,6 @@ final class MainViewController: UIViewController {
         presenter?.newsTapped()
     }
     
-//    private func getUserName() -> String {
-//        let userName = UserDefaults.standard.string(forKey: "name")
-//        return userName ?? "User"
-//    }
-    
-//    private func showNotificationRequest() {
-//        NotificationService.shared.requestPermission { granted in
-//            if granted {
-//                UserDefaults.standard.set(true, forKey: "notifications")
-//                NotificationService.shared.scheduleNotification()
-//                print("✅ Разрешение на уведомления получено")
-//            } else {
-//                UserDefaults.standard.set(false, forKey: "notifications")
-//                print("❌ Пользователь отказался от получения уведомлений")
-//            }
-//        }
-//    }
 }
 
 extension MainViewController: MainViewProtocol {

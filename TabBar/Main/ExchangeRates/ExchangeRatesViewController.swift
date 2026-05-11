@@ -83,25 +83,6 @@ final class ExchangeRatesViewController: UIViewController {
     }
     
     // MARK: – Actions
-//    private func fetchExchangeRates() {
-//        activityIndicator.startAnimating()
-//        
-//        NetworkService.shared.fetchExchangeRates { [weak self] result in
-//            DispatchQueue.main.async {
-//                self?.activityIndicator.stopAnimating()
-//                
-//                switch result {
-//                case .success(let rates):
-//                    self?.rates = rates
-//                    self?.setupTextIntoLabel()
-//                case .failure(let error):
-//                    self?.label.text = "Failed to fetch data\n\(error.localizedDescription)"
-//                    self?.showReloadButton()
-//                }
-//            }
-//        }
-//    }
-    
     private func setupTextIntoLabel() {
         label.isHidden = false
         guard let rate = rates.first else {

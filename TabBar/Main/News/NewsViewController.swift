@@ -173,5 +173,4 @@ extension NewsViewController: NewsViewProtocol {
         showReloadButton()
     }
     
-    
 }
