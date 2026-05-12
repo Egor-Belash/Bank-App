@@ -10,14 +10,13 @@ import Security
 
 protocol RegistrationViewDelegate: AnyObject {
     func saveButtonTapped()
-    func showError(title: String, message: String)
+    // func showError(title: String, message: String)
 }
 
 final class RegistrationView: UIView {
     
     // MARK: – Properties
     weak var delegate: RegistrationViewDelegate?
-    private let savedLogin = ""
     
     // MARK: – Subviews
     private let scrollView: UIScrollView = {
@@ -291,7 +290,7 @@ final class RegistrationView: UIView {
     
     // MARK: – Actions
     @objc private func saveButtonTapped() {
-        guard checkIfRequiredFieldsAreFilled() else { return }
+        // guard checkIfRequiredFieldsAreFilled() else { return }
     
         saveData()
         delegate?.saveButtonTapped()
@@ -319,39 +318,74 @@ final class RegistrationView: UIView {
         }
     }
 
-    private func checkIfRequiredFieldsAreFilled() -> Bool {
-        guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces),
-              let secondPassword = secondPasswordTextField.text?.trimmingCharacters(in: .whitespaces),
-              let account = loginTextField.text?.trimmingCharacters(in: .whitespaces)
-        else { return false }
+    // private func checkIfRequiredFieldsAreFilled() -> Bool {
+    //     guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces),
+    //           let secondPassword = secondPasswordTextField.text?.trimmingCharacters(in: .whitespaces),
+    //           let account = loginTextField.text?.trimmingCharacters(in: .whitespaces)
+    //     else { return false }
         
-        if password.isEmpty || secondPassword.isEmpty || account.isEmpty {
-            loginTextField.backgroundColor = .red
-            passwordTextField.backgroundColor = .red
-            secondPasswordTextField.backgroundColor = .red
-            delegate?.showError(title: "Ошибка", message: "Обязателные поля должны быть заполнены")
-            return false
-        }
+    //     if password.isEmpty || secondPassword.isEmpty || account.isEmpty {
+    //         loginTextField.backgroundColor = .red
+    //         passwordTextField.backgroundColor = .red
+    //         secondPasswordTextField.backgroundColor = .red
+    //         delegate?.showError(title: "Ошибка", message: "Обязателные поля должны быть заполнены")
+    //         return false
+    //     }
         
-        if password != secondPassword {
-            secondPasswordTextField.backgroundColor = .red
-            delegate?.showError(title: "Ошибка", message: "Пароли должны совпадать")
-            return false
-        } else {
-            secondPasswordTextField.backgroundColor = .systemBackground
-        }
+    //     if password != secondPassword {
+    //         secondPasswordTextField.backgroundColor = .red
+    //         delegate?.showError(title: "Ошибка", message: "Пароли должны совпадать")
+    //         return false
+    //     } else {
+    //         secondPasswordTextField.backgroundColor = .systemBackground
+    //     }
         
-        // Проверка на уникальность логина
-        let savedLogin = UserDefaults.standard.string(forKey: "login")
-        if account == savedLogin {
-            loginTextField.backgroundColor = .red
-            delegate?.showError(title: "Ошибка", message: "Пользователь с таким логином уже существует")
-            return false
-        }
+    //     // Проверка на уникальность логина
+    //     let savedLogin = UserDefaults.standard.string(forKey: "login")
+    //     if account == savedLogin {
+    //         loginTextField.backgroundColor = .red
+    //         delegate?.showError(title: "Ошибка", message: "Пользователь с таким логином уже существует")
+    //         return false
+    //     }
         
-        return true
+    //     return true
+    // }
+
+    func getLogin() -> String {
+        loginTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
+
+    func getPassword() -> String {
+        return passwordTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+    }
+
+    func getSecondPassword() -> String {
+        secondPasswordTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+    }
+
+    func setTextFieldsColor(_ textField: RegistrationTextFields) {
+        switch field {
+        case .login:
+            loginTextField.backgroundColor = .red
+        case .password:
+            password.backgroundColor = .red
+        case .secondPassword:
+            secondPassword.backgroundColor = .red
+        }
+    }
+
+    func clearTextFieldsColor() {
+        loginTextField.backgroundColor = .systemBackground
+        password.backgroundColor = .systemBackground
+        secondPassword.backgroundColor = .systemBackground
+    } 
     
+}
+
+enum RegistrationTextFields {
+    case login
+    case password
+    case secondPassword
 }
 
 // MARK: – UITextFieldDelegate

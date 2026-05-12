@@ -10,7 +10,8 @@ import UIKit
 final class RegistrationViewController: UIViewController {
     
     // MARK: – Properties
-    
+    var presenter: RegistrationPresenterProtocol?
+
     // MARK: – Subviews
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -113,12 +114,42 @@ final class RegistrationViewController: UIViewController {
 
 // MARK: – RegistrationViewDelegate
 extension RegistrationViewController: RegistrationViewDelegate {
-    func showError(title: String, message: String) {
-        showSimpleAlert(title: title, message: message)
-    }
+    // func showError(title: String, message: String) {
+    //     showSimpleAlert(title: title, message: message)
+    // }
     
     func saveButtonTapped() {
+        presenter?.saveButtonTapped()
         self.dismiss(animated: true)
     }
     
 }
+
+// MARK: – RegistrationViewDelegate
+extension RegistrationViewController: RegistrationViewProtocol {
+    func getLogin() -> String {
+        return registrationView.getLogin()
+    }
+
+    func getPassword() -> String {
+        return registrationView.getPassword()
+    }
+    
+    func getSecondPassword() -> String {
+        return registrationView.getSecondPassword()
+    }
+
+    func setTextFieldsColor(_ textField: RegistrationTextFields) {
+        registrationView.setTextFieldsColor(textField)
+    }
+
+    func clearTextFieldsColor() {
+        registrationView.clearTextFieldsColor()
+    }
+
+    func showError(title: String, message: String) {
+        showSimpleAlert(title: title, message: message)
+    }
+
+}
+
