@@ -10,7 +10,7 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
 
         guard let password = view?.getPassword(),
               let secondPassword = view?.getSecondPassword(),
-              let account = view?.getLogin(),
+              let account = view?.getLogin()
         else { return }
 
         if password.isEmpty {
@@ -48,13 +48,13 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
             return
         }
 
-        saveData(account, password)
+        saveData(login: account, password: password)
 
         router?.closeRegistrationVC()
     }
 
     func exitButtonTapped() {
-        router?.closeRegistrationVC
+        router?.closeRegistrationVC()
     }
 
     // MARK: – Privates 

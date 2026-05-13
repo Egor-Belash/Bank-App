@@ -9,7 +9,7 @@ protocol RegistrationViewProtocol: AnyObject {
     func getEmail() -> String
     func setTextFieldsColor(_ textField: RegistrationTextFields)
     func clearTextFieldsColor()
-    func showError(title: "Ошибка", message: "Введите пароль")
+    func showError(title: String, message: String)
 }
 
 protocol RegistrationPresenterProtocol: AnyObject {

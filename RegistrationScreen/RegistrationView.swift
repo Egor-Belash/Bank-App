@@ -292,7 +292,7 @@ final class RegistrationView: UIView {
     @objc private func saveButtonTapped() {
         // guard checkIfRequiredFieldsAreFilled() else { return }
     
-        saveData()
+//        saveData()
         delegate?.saveButtonTapped()
     }
     
@@ -371,26 +371,26 @@ final class RegistrationView: UIView {
         phoneNumberTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
 
-    func getEmail() -> String() {
+    func getEmail() -> String {
         emailTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
 
     func setTextFieldsColor(_ textField: RegistrationTextFields) {
-        switch field {
+        switch textField {
         case .login:
             loginTextField.backgroundColor = .red
         case .password:
-            password.backgroundColor = .red
+            passwordTextField.backgroundColor = .red
         case .secondPassword:
-            secondPassword.backgroundColor = .red
+            secondPasswordTextField.backgroundColor = .red
         }
     }
 
     func clearTextFieldsColor() {
         loginTextField.backgroundColor = .systemBackground
-        password.backgroundColor = .systemBackground
-        secondPassword.backgroundColor = .systemBackground
-    } 
+        passwordTextField.backgroundColor = .systemBackground
+        secondPasswordTextField.backgroundColor = .systemBackground
+    }
     
 }
 

@@ -21,7 +21,7 @@ final class RegistrationRouter: RegistrationRouterProtocol {
         let vc = Self.build()
         // viewController?.navigationController?.pushViewController(vc, animated: true)
         let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true)
+        viewController?.present(nav, animated: true)
     }
 
     func closeRegistrationVC() {
