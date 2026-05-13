@@ -29,10 +29,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if isLoggedIn {
                 window?.rootViewController = MainTabBarViewController()
             } else {
-                window?.rootViewController = LogInViewController()
+                window?.rootViewController = LogInRouter.build()
             }
         } else {
-            window?.rootViewController = OnBoardingViewController()
+            window?.rootViewController = OnBoardingRouter.build()
         }
         
         let themeValue = UserDefaults.standard.integer(forKey: "theme")

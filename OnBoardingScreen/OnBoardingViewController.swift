@@ -11,6 +11,7 @@ import Lottie
 final class OnBoardingViewController: UIViewController {
     
     // MARK: – Properties
+    var router: OnBoardingRouterProtocol?
     private let slides = [
         CellModel(
             mainTitle: "Добро пожаловать в Bank App!",
@@ -169,31 +170,32 @@ extension OnBoardingViewController: OnBoardingCellDelegate {
             collectionView.scrollToItem(at: IndexPath(item: nextIndex, section: 0), at: .top, animated: true)
             pageControl.currentPage = nextIndex         // обновляем чтобы по нажатию на кнопку тоже работал
         } else {                        // для последнего экрана
-            goToLogInScreen()
+            router?.openLogInViewController()
         }
     }
     
-    private func goToLogInScreen() {
-        // Showing onboarding once
-        UserDefaults.standard.set(true, forKey: "onboardingIsDone")
-        
-        // Go to the LogInVC
-        let vc = LogInViewController()
-        
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let sceneDelegate = windowScene.delegate as? SceneDelegate,
-              let window = sceneDelegate.window
-        else { return }
-    
-        window.rootViewController = vc
-        
-        UIView.transition(
-            with: window,
-            duration: 0.3,
-            options: .transitionCrossDissolve,
-            animations: nil,
-            completion: nil
-        )
-    }
+//    private func goToLogInScreen() {
+//        router?.openLogInViewController()
+//        // Showing onboarding once
+//        UserDefaults.standard.set(true, forKey: "onboardingIsDone")
+//        
+//        // Go to the LogInVC
+//        let vc = LogInRouter.build()
+//        
+//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//              let sceneDelegate = windowScene.delegate as? SceneDelegate,
+//              let window = sceneDelegate.window
+//        else { return }
+//    
+//        window.rootViewController = vc
+//        
+//        UIView.transition(
+//            with: window,
+//            duration: 0.3,
+//            options: .transitionCrossDissolve,
+//            animations: nil,
+//            completion: nil
+//        )
+//    }
     
 }
