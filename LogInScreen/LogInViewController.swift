@@ -130,6 +130,7 @@ extension LogInViewController: LogInViewDelegate {
     
     func registrationButtonTaped() {
         presenter?.registrationButtonTapped()
+        print("loginVC")
         // let vc = RegistrationRouter.build()
         // let nav = UINavigationController(rootViewController: vc)
         // present(nav, animated: true)
@@ -155,7 +156,7 @@ extension LogInViewController: LogInViewDelegate {
 
 // MARK: – LogInViewProtocol
 extension LogInViewController: LogInViewProtocol {
-    func showError(_ title: String, _ message: String) {
+    func showError(title: String, message: String) {
         showSimpleAlert(title: title, message: message)
     }
 }

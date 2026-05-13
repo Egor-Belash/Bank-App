@@ -1,8 +1,7 @@
 import Foundation
 
 protocol LogInViewProtocol: AnyObject {
-
-    func showError(_ title: String, _ message: String)
+    func showError(title: String, message: String)
 }
 
 protocol LogInPresenterProtocol: AnyObject {

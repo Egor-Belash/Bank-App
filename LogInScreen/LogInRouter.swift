@@ -10,7 +10,7 @@ final class LogInRouter: LogInRouterProtocol {
         let router = LogInRouter()
 
         vc.presenter = presenter
-        presenter.vc = vc
+        presenter.view = vc
         presenter.router = router
         router.viewController = vc
 
@@ -35,8 +35,9 @@ final class LogInRouter: LogInRouterProtocol {
 
     func goToRegistrationScreen() {
         let vc = RegistrationRouter.build()
-        // let nav = UINavigationController(rootViewController: vc)
-        // present(nav, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        viewController?.present(nav, animated: true)
+        print("router")
     }
 
 }
