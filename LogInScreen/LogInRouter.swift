@@ -1,37 +1,28 @@
-//
-//  SettingsRouter.swift
-//  Bank App
-//
-//  Created by Egor on 09.05.2026.
-//
-
 import UIKit
 
-final class SettingsRouter: SettingsRouterProtocol {
-    
+final class LogInRouter: LogInRouterProtocol {
+
     weak var viewController: UIViewController?
-    
+
     static func build() -> UIViewController {
-        let vc = SettingsViewController()
-        let presenter = SettingsPresenter()
-        let router = SettingsRouter()
-        
-        presenter.view = vc
-        presenter.router = router
+        let vc = LogInViewController()
+        let presenter = LogInPresenter()
+        let router = LogInRouter()
+
         vc.presenter = presenter
+        presenter.vc = vc
+        presenter.router = router
         router.viewController = vc
-        
+
         return vc
     }
-    
-    func moveToLoginVC() {
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
-        
+
+    func goToMainTabBarScreen() {
         guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = scene.windows.first else
         { return }
         
-        window.rootViewController = LogInRouter.build()
+        window.rootViewController = MainTabBarViewController()
         
         UIView.transition(
             with: window,
@@ -40,7 +31,12 @@ final class SettingsRouter: SettingsRouterProtocol {
             animations: nil,
             completion: nil
         )
-
     }
-    
+
+    func goToRegistrationScreen() {
+        let vc = RegistrationRouter.build()
+        // let nav = UINavigationController(rootViewController: vc)
+        // present(nav, animated: true)
+    }
+
 }

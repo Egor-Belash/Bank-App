@@ -12,6 +12,7 @@ final class LogInViewController: UIViewController {
     // MARK: – Properties
     private let savedLogin = ""
     private let savedPassword = ""
+    var presenter: LogInPresenterProtocol?
     
     // MARK: – Subviews
     private let imageView: UIImageView = {
@@ -100,52 +101,61 @@ final class LogInViewController: UIViewController {
 extension LogInViewController: LogInViewDelegate {
     
     func loginButtonTaped(login: String, password: String) {
-        guard !login.isEmpty, !password.isEmpty else {
-            showSimpleAlert(title: "Ошибка", message: "Введите логин и пароль")
-            return
-        }
+        presenter?.loginButtonTapped(login, password)
+        // guard !login.isEmpty, !password.isEmpty else {
+        //     showSimpleAlert(title: "Ошибка", message: "Введите логин и пароль")
+        //     return
+        // }
         
-        guard let savedLogin = UserDefaults.standard.string(forKey: "login") else {
-            showSimpleAlert(title: "Ошибка", message: "Пользователь не зарегистрирован")
-            return
-        }
+        // guard let savedLogin = UserDefaults.standard.string(forKey: "login") else {
+        //     showSimpleAlert(title: "Ошибка", message: "Пользователь не зарегистрирован")
+        //     return
+        // }
         
-        guard let savedPassword = KeychainService.shared.loadPasswordFromKeychain(login: savedLogin) else {
-            showSimpleAlert(title: "Ошибка", message: "Пароль не найден")
-            return
-        }
+        // guard let savedPassword = KeychainService.shared.loadPasswordFromKeychain(login: savedLogin) else {
+        //     showSimpleAlert(title: "Ошибка", message: "Пароль не найден")
+        //     return
+        // }
         
-        if login == savedLogin && password == savedPassword {
-            // If user us LoggedIn, he will be loggedIn directly to the MainTabBarViewController
-            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        // if login == savedLogin && password == savedPassword {
+        //     // If user us LoggedIn, he will be loggedIn directly to the MainTabBarViewController
+        //     UserDefaults.standard.set(true, forKey: "isLoggedIn")
             
-            // Go to the MainTabBarViewController
-            goToMainTabBarScreen()
-        } else {
-            showSimpleAlert(title: "Ошибка", message: "Неверный логин или пароль")
-        }
+        //     // Go to the MainTabBarViewController
+        //     goToMainTabBarScreen()
+        // } else {
+        //     showSimpleAlert(title: "Ошибка", message: "Неверный логин или пароль")
+        // }
     }
     
     func registrationButtonTaped() {
-        let vc = RegistrationViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true)
+        presenter?.registrationButtonTapped()
+        // let vc = RegistrationRouter.build()
+        // let nav = UINavigationController(rootViewController: vc)
+        // present(nav, animated: true)
     }
     
     private func goToMainTabBarScreen() {
-        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = scene.windows.first else
-        { return }
+        // guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+        //       let window = scene.windows.first else
+        // { return }
         
-        window.rootViewController = MainTabBarViewController()
+        // window.rootViewController = MainTabBarViewController()
         
-        UIView.transition(
-            with: window,
-            duration: 0.3,
-            options: .transitionFlipFromBottom,
-            animations: nil,
-            completion: nil
-        )
+        // UIView.transition(
+        //     with: window,
+        //     duration: 0.3,
+        //     options: .transitionFlipFromBottom,
+        //     animations: nil,
+        //     completion: nil
+        // )
     }
     
+}
+
+// MARK: – LogInViewProtocol
+extension LogInViewController: LogInViewProtocol {
+    func showError(_ title: String, _ message: String) {
+        showSimpleAlert(title: title, message: message)
+    }
 }
