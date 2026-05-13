@@ -99,7 +99,6 @@ final class RegistrationViewController: UIViewController {
     // MARK: – Actions
     @objc private func exitButtonTapped() {
         presenter?.exitButtonTapped()
-        // dismiss(animated: true)
     }
     
     // скрытие клавиатуры по тапу в любой части экрана
@@ -115,13 +114,8 @@ final class RegistrationViewController: UIViewController {
 
 // MARK: – RegistrationViewDelegate
 extension RegistrationViewController: RegistrationViewDelegate {
-    // func showError(title: String, message: String) {
-    //     showSimpleAlert(title: title, message: message)
-    // }
-    
     func saveButtonTapped() {
         presenter?.saveButtonTapped()
-        // self.dismiss(animated: true)
     }
     
 }

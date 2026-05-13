@@ -10,7 +10,6 @@ import Security
 
 protocol RegistrationViewDelegate: AnyObject {
     func saveButtonTapped()
-    // func showError(title: String, message: String)
 }
 
 final class RegistrationView: UIView {
@@ -290,66 +289,8 @@ final class RegistrationView: UIView {
     
     // MARK: – Actions
     @objc private func saveButtonTapped() {
-        // guard checkIfRequiredFieldsAreFilled() else { return }
-    
-//        saveData()
         delegate?.saveButtonTapped()
     }
-    
-    // private func saveData() {
-    //     guard let login = loginTextField.text?.trimmingCharacters(in: .whitespaces), !login.isEmpty,
-    //           let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces), !password.isEmpty
-    //     else { return }
-        
-    //     UserDefaults.standard.set(login, forKey: "login")
-        
-    //     KeychainService.shared.savePasswordToKeychain(login: login, password: password)
-        
-    //     if let name = nameTextField.text?.trimmingCharacters(in: .whitespaces), !name.isEmpty {
-    //         UserDefaults.standard.set(name, forKey: "name")
-    //     }
-        
-    //     if let phone = phoneNumberTextField.text?.trimmingCharacters(in: .whitespaces), !phone.isEmpty {
-    //         UserDefaults.standard.set(phone, forKey: "phone")
-    //     }
-        
-    //     if let email = emailTextField.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty {
-    //         UserDefaults.standard.set(email, forKey: "email")
-    //     }
-    // }
-
-    // private func checkIfRequiredFieldsAreFilled() -> Bool {
-    //     guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces),
-    //           let secondPassword = secondPasswordTextField.text?.trimmingCharacters(in: .whitespaces),
-    //           let account = loginTextField.text?.trimmingCharacters(in: .whitespaces)
-    //     else { return false }
-        
-    //     if password.isEmpty || secondPassword.isEmpty || account.isEmpty {
-    //         loginTextField.backgroundColor = .red
-    //         passwordTextField.backgroundColor = .red
-    //         secondPasswordTextField.backgroundColor = .red
-    //         delegate?.showError(title: "Ошибка", message: "Обязателные поля должны быть заполнены")
-    //         return false
-    //     }
-        
-    //     if password != secondPassword {
-    //         secondPasswordTextField.backgroundColor = .red
-    //         delegate?.showError(title: "Ошибка", message: "Пароли должны совпадать")
-    //         return false
-    //     } else {
-    //         secondPasswordTextField.backgroundColor = .systemBackground
-    //     }
-        
-    //     // Проверка на уникальность логина
-    //     let savedLogin = UserDefaults.standard.string(forKey: "login")
-    //     if account == savedLogin {
-    //         loginTextField.backgroundColor = .red
-    //         delegate?.showError(title: "Ошибка", message: "Пользователь с таким логином уже существует")
-    //         return false
-    //     }
-        
-    //     return true
-    // }
 
     func getLogin() -> String {
         loginTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""

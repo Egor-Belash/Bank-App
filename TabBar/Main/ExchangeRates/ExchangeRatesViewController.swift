@@ -145,6 +145,4 @@ extension ExchangeRatesViewController: ExchangeRatesViewProtocol {
         label.text = message
         showReloadButton()
     }
-    
-    
 }

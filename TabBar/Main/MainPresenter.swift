@@ -32,6 +32,10 @@ final class MainPresenter: MainPresenterProtocol {
     // MARK: – Privates
     private func getUserName() {
         let userName = UserDefaults.standard.string(forKey: "name") ?? "User"
+        guard !userName.isEmpty else {
+            view?.getUserName(name: "User")
+            return
+        }
         view?.getUserName(name: userName)
     }
     

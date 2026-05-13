@@ -55,26 +55,3 @@ struct ExchangeRatesModel: Codable {
     }
 }
 
-//[ {
-//    "kurs_date_time" : "2026-04-27 17:20:00",
-//    "USDCARD_in" : "2.8100",
-//    "USDCARD_out" : "2.8550",
-//    "EURCARD_in" : "3.2800",
-//    "EURCARD_out" : "3.3500",
-//    "RUBCARD_in" : "3.6800",
-//    "RUBCARD_out" : "3.7400",
-//    "CNYCARD_in" : "4.1800",
-//    "CNYCARD_out" : "4.4500",
-//    "USDCARD_EURCARD_in" : "0.8420",
-//    "USDCARD_EURCARD_out" : "1.1580",
-//    "USDCARD_RUBCARD_in" : "75.2000",
-//    "USDCARD_RUBCARD_out" : "0.0129",
-//    "RUBCARD_EURCARD_out" : "87.8000",
-//    "RUBCARD_EURCARD_in" : "0.0110",
-//    "CNYCARD_USDCARD_in" : "0.1465",
-//    "CNYCARD_USDCARD_out" : "6.3150",
-//    "CNYCARD_EURCARD_in" : "0.1250",
-//    "CNYCARD_EURCARD_out" : "7.3710",
-//    "CNYCARD_RUBCARD_in" : "11.1765",
-//    "CNYCARD_RUBCARD_out" : "0.0830"
-//} ]

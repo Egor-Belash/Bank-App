@@ -36,8 +36,6 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
             view?.setTextFieldsColor(.secondPassword)
             view?.showError(title: "Ошибка", message: "Пароли должны совпадать")
             return
-        } else {
-            // secondPasswordTextField.backgroundColor = .systemBackground // подумать тут
         }
         
         // Проверка на уникальность логина

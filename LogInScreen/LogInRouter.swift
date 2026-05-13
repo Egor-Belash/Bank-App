@@ -37,7 +37,6 @@ final class LogInRouter: LogInRouterProtocol {
         let vc = RegistrationRouter.build()
         let nav = UINavigationController(rootViewController: vc)
         viewController?.present(nav, animated: true)
-        print("router")
     }
 
 }

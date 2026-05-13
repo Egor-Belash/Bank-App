@@ -10,7 +10,6 @@ import UIKit
 final class MainViewController: UIViewController {
     
     // MARK: – Properties
-    private let userName = ""
     var presenter: MainPresenterProtocol?
     
     // MARK: – Subviews

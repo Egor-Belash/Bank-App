@@ -33,11 +33,6 @@ final class LogInPresenter: LogInPresenterProtocol {
     }
 
     func registrationButtonTapped() {
-        print("presenter")
         router?.goToRegistrationScreen()
-        
     }
-
-
-
 }

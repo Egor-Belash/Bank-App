@@ -173,29 +173,4 @@ extension OnBoardingViewController: OnBoardingCellDelegate {
             router?.openLogInViewController()
         }
     }
-    
-//    private func goToLogInScreen() {
-//        router?.openLogInViewController()
-//        // Showing onboarding once
-//        UserDefaults.standard.set(true, forKey: "onboardingIsDone")
-//        
-//        // Go to the LogInVC
-//        let vc = LogInRouter.build()
-//        
-//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//              let sceneDelegate = windowScene.delegate as? SceneDelegate,
-//              let window = sceneDelegate.window
-//        else { return }
-//    
-//        window.rootViewController = vc
-//        
-//        UIView.transition(
-//            with: window,
-//            duration: 0.3,
-//            options: .transitionCrossDissolve,
-//            animations: nil,
-//            completion: nil
-//        )
-//    }
-    
 }
