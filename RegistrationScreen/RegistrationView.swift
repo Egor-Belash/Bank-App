@@ -296,27 +296,27 @@ final class RegistrationView: UIView {
         delegate?.saveButtonTapped()
     }
     
-    private func saveData() {
-        guard let login = loginTextField.text?.trimmingCharacters(in: .whitespaces), !login.isEmpty,
-              let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces), !password.isEmpty
-        else { return }
+    // private func saveData() {
+    //     guard let login = loginTextField.text?.trimmingCharacters(in: .whitespaces), !login.isEmpty,
+    //           let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces), !password.isEmpty
+    //     else { return }
         
-        UserDefaults.standard.set(login, forKey: "login")
+    //     UserDefaults.standard.set(login, forKey: "login")
         
-        KeychainService.shared.savePasswordToKeychain(login: login, password: password)
+    //     KeychainService.shared.savePasswordToKeychain(login: login, password: password)
         
-        if let name = nameTextField.text?.trimmingCharacters(in: .whitespaces), !name.isEmpty {
-            UserDefaults.standard.set(name, forKey: "name")
-        }
+    //     if let name = nameTextField.text?.trimmingCharacters(in: .whitespaces), !name.isEmpty {
+    //         UserDefaults.standard.set(name, forKey: "name")
+    //     }
         
-        if let phone = phoneNumberTextField.text?.trimmingCharacters(in: .whitespaces), !phone.isEmpty {
-            UserDefaults.standard.set(phone, forKey: "phone")
-        }
+    //     if let phone = phoneNumberTextField.text?.trimmingCharacters(in: .whitespaces), !phone.isEmpty {
+    //         UserDefaults.standard.set(phone, forKey: "phone")
+    //     }
         
-        if let email = emailTextField.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty {
-            UserDefaults.standard.set(email, forKey: "email")
-        }
-    }
+    //     if let email = emailTextField.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty {
+    //         UserDefaults.standard.set(email, forKey: "email")
+    //     }
+    // }
 
     // private func checkIfRequiredFieldsAreFilled() -> Bool {
     //     guard let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces),
@@ -356,11 +356,23 @@ final class RegistrationView: UIView {
     }
 
     func getPassword() -> String {
-        return passwordTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+        passwordTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
 
     func getSecondPassword() -> String {
         secondPasswordTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+    }
+
+    func getName() -> String {
+        nameTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+    }
+
+    func getPhone() -> String {
+        phoneNumberTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+    }
+
+    func getEmail() -> String() {
+        emailTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
 
     func setTextFieldsColor(_ textField: RegistrationTextFields) {

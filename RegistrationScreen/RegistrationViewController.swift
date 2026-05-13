@@ -98,7 +98,8 @@ final class RegistrationViewController: UIViewController {
     
     // MARK: – Actions
     @objc private func exitButtonTapped() {
-        dismiss(animated: true)
+        presenter?.exitButtonTapped()
+        // dismiss(animated: true)
     }
     
     // скрытие клавиатуры по тапу в любой части экрана
@@ -120,7 +121,7 @@ extension RegistrationViewController: RegistrationViewDelegate {
     
     func saveButtonTapped() {
         presenter?.saveButtonTapped()
-        self.dismiss(animated: true)
+        // self.dismiss(animated: true)
     }
     
 }
@@ -138,6 +139,18 @@ extension RegistrationViewController: RegistrationViewProtocol {
     func getSecondPassword() -> String {
         return registrationView.getSecondPassword()
     }
+
+    func getName() -> String {
+        return registrationView.getName()
+    }
+
+    func getPhone() -> String {
+        return registrationView.getPhone()
+    }
+
+    func getEmail() -> String {
+        return registrationView.getEmail()
+    }    
 
     func setTextFieldsColor(_ textField: RegistrationTextFields) {
         registrationView.setTextFieldsColor(textField)

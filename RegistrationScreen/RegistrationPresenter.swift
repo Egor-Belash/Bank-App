@@ -48,11 +48,28 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
             return
         }
 
-        UserDefaults.standard.set(account, forKey: "login")
-
-        KeychainService.shared.savePasswordToKeychain(login: account, password: password)
+        saveData(account, password)
 
         router?.closeRegistrationVC()
+    }
+
+    func exitButtonTapped() {
+        router?.closeRegistrationVC
+    }
+
+    // MARK: – Privates 
+    private func saveData(login: String, password: String) {
+        UserDefaults.standard.set(login, forKey: "login")
+        KeychainService.shared.savePasswordToKeychain(login: login, password: password)
+
+        let name = view?.getName()
+        UserDefaults.standard.set(name, forKey: "name")
+
+        let phone = view?.getPhone()
+        UserDefaults.standard.set(phone, forKey: "phone")
+
+        let email = view?.getEmail()
+        UserDefaults.standard.set(email, forKey: "email")
     }
 
 }
