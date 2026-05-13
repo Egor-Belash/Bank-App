@@ -31,11 +31,11 @@ final class SettingsPresenter: SettingsPresenterProtocol {
         if isOn {
             NotificationService.shared.requestPermission { [weak self] granted in
                 if granted {
-                    self?.view?.setTextForNotification("Disable notifications")
+                    self?.view?.setTextForNotification(String(localized: .settingsDisableNotificationLabel))
                     UserDefaults.standard.set(true, forKey: "notifications")
                     NotificationService.shared.scheduleNotification()
                 } else {
-                    self?.view?.setTextForNotification("Enable notifications")
+                    self?.view?.setTextForNotification(String(localized: .settingsEnableNotificationLabel))
                     self?.view?.setSwitchIsOn(false)
                     UserDefaults.standard.set(false, forKey: "notifications")
                     
@@ -43,7 +43,7 @@ final class SettingsPresenter: SettingsPresenterProtocol {
                 }
             }
         } else {
-            view?.setTextForNotification("Enable notifications")
+            view?.setTextForNotification(String(localized: .settingsEnableNotificationLabel))
             UserDefaults.standard.set(false, forKey: "notifications")
             NotificationService.shared.cancelNotifications()
         }
@@ -64,6 +64,6 @@ final class SettingsPresenter: SettingsPresenterProtocol {
     private func loadNotificationStatus() {
         let value = UserDefaults.standard.bool(forKey: "notifications")
         view?.setSwitchIsOn(value)
-        view?.setTextForNotification(value == true ? "Disable notifications" : "Enable notifications")
+        view?.setTextForNotification(value == true ? String(localized: .settingsDisableNotificationLabel) : String(localized: .settingsEnableNotificationLabel))
     }
 }

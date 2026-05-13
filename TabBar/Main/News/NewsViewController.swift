@@ -18,7 +18,7 @@ final class NewsViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.text = "Новости"
+        label.text = String(localized: .news)
         return label
     }()
     

@@ -22,13 +22,13 @@ final class MainTabBarViewController: UITabBarController {
         tabBarController?.selectedIndex = 0
         
         mainNavVC.tabBarItem = UITabBarItem(
-            title: "Main",
+            title: String(localized: .tabBarNameMain),
             image: UIImage(systemName: "house"),
             selectedImage: UIImage(systemName: "house.fill")
         )
         
         settingsNavVC.tabBarItem = UITabBarItem(
-            title: "Settings",
+            title: String(localized: .tabBarNameSettings),
             image: UIImage(systemName: "gear"),
             selectedImage: UIImage(systemName: "gear.fill")
         )

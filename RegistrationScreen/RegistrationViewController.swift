@@ -32,12 +32,13 @@ final class RegistrationViewController: UIViewController {
     private let youAreNotRegisteredLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "You are not registered?😱"
+        label.text = String(localized: .registrationTitle)
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textColor = .white
         label.layer.shadowColor = UIColor.black.cgColor
         label.layer.shadowOffset = CGSize(width: 0, height: 3)
         label.layer.shadowOpacity = 0.3
+        label.numberOfLines = 0
         return label
     }()
     
@@ -87,7 +88,8 @@ final class RegistrationViewController: UIViewController {
             blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             youAreNotRegisteredLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            youAreNotRegisteredLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            youAreNotRegisteredLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            youAreNotRegisteredLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
             registrationView.topAnchor.constraint(equalTo: youAreNotRegisteredLabel.bottomAnchor, constant: 30),
             registrationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),

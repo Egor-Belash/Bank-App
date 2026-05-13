@@ -22,7 +22,7 @@ final class LogInView: UIView {
     private let loginLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Логин"
+        label.text = String(localized: .registrationEnterLogin)
         label.textColor = .black
         return label
     }()
@@ -31,7 +31,7 @@ final class LogInView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Введите логин"
+        textField.placeholder = String(localized: .registrationLoginTextField)
         textField.returnKeyType = .continue
         return textField
     }()
@@ -39,7 +39,7 @@ final class LogInView: UIView {
     private let passwordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Пароль"
+        label.text = String(localized: .registrationEnterPassword)
         label.textColor = .black
         return label
     }()
@@ -48,7 +48,7 @@ final class LogInView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Введите пароль"
+        textField.placeholder = String(localized: .registrationPasswordTextField)
         textField.returnKeyType = .done
         return textField
     }()
@@ -56,7 +56,7 @@ final class LogInView: UIView {
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Войти", for: .normal)
+        button.setTitle(String(localized: .logIn), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor(named: "yellowColor2")
@@ -71,7 +71,7 @@ final class LogInView: UIView {
     private let registrationButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Регистрация", for: .normal)
+        button.setTitle(String(localized: .signUp), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor(named: "blueColor2")

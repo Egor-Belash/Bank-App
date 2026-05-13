@@ -14,34 +14,34 @@ final class OnBoardingViewController: UIViewController {
     var router: OnBoardingRouterProtocol?
     private let slides = [
         CellModel(
-            mainTitle: "Добро пожаловать в Bank App!",
+            mainTitle: String(localized: .ob1Title),
             animationName: "OnlinePayment",
-            title: "Лучший банк в вашей жизни",
-            buttonTitle: "Далее",
+            title: String(localized: .ob1Text),
+            buttonTitle: String(localized: .ob1Button),
             buttonColor: UIColor(named: "yellowColor2")!
         ),
         CellModel(
-            mainTitle: "Скорость – это про нас!",
+            mainTitle: String(localized: .ob2Title),
             animationName: "MoneyMoneyMoney",
-            title: "Принимаем деньги быстрее, чем выдаём",
-            buttonTitle: "Супер!",
+            title: String(localized: .ob2Text),
+            buttonTitle: String(localized: .ob2Button),
             buttonColor: UIColor(named: "lightBlueColor2")!
         ),
         CellModel(
-            mainTitle: "Ваши деньги под надёжной защитой!",
+            mainTitle: String(localized: .ob3Title),
             animationName: "MoneyPhoneServers",
-            title: "Мошенники не смогут украсть ваши деньги, если это сделаем мы",
-            buttonTitle: "ОГО!",
+            title: String(localized: .ob3Text),
+            buttonTitle: String(localized: .ob3Button),
             buttonColor: UIColor(named: "blueColor2")!
         ),
         CellModel(
-            mainTitle: "Начните прямо сейчас!",
+            mainTitle: String(localized: .ob4Title),
             animationName: "OnlineMoneyTransfer",
-            title: "Больше денег у вас – меньше денег у вас",
-            buttonTitle: "Начать",
+            title: String(localized: .ob4Text),
+            buttonTitle: String(localized: .ob4Button),
             buttonColor: UIColor(named: "yellowColor2")!
         ),
-
+        
     ]
     
     // MARK: – Subviews

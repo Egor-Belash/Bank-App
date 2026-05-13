@@ -15,26 +15,26 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
 
         if password.isEmpty {
             view?.setTextFieldsColor(.password)
-            view?.showError(title: "Ошибка", message: "Введите пароль")
+            view?.showError(title: String(localized: .error), message: String(localized: .registrationEnterPassword))
             return
         }
 
         if secondPassword.isEmpty {
             view?.setTextFieldsColor(.secondPassword)
-            view?.showError(title: "Ошибка", message: "Повторите пароль")
+            view?.showError(title: String(localized: .error), message: String(localized: .registrationSecondPasswordLabel))
             return
         }
 
         if account.isEmpty {
             view?.setTextFieldsColor(.login)
-            view?.showError(title: "Ошибка", message: "Введите логин")
+            view?.showError(title: String(localized: .error), message: String(localized: .registrationEnterLogin))
             return
         }
         
         if password != secondPassword {
             view?.setTextFieldsColor(.password)
             view?.setTextFieldsColor(.secondPassword)
-            view?.showError(title: "Ошибка", message: "Пароли должны совпадать")
+            view?.showError(title: String(localized: .error), message: String(localized: .registrationPasswordsMustBeEqual))
             return
         }
         
@@ -42,7 +42,7 @@ final class RegistrationPresenter: RegistrationPresenterProtocol {
         let savedLogin = UserDefaults.standard.string(forKey: "login")
         if account == savedLogin {
             view?.setTextFieldsColor(.login)
-            view?.showError(title: "Ошибка", message: "Пользователь с таким логином уже существует")
+            view?.showError(title: String(localized: .error), message: String(localized: .registrationUsernameExists))
             return
         }
 

@@ -36,7 +36,7 @@ final class RegistrationView: UIView {
     private let loginLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Придумайте логин"
+        label.text = String(localized: .registrationLoginLabel)
         label.textColor = .black
         return label
     }()
@@ -45,7 +45,7 @@ final class RegistrationView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Логин"
+        textField.placeholder = String(localized: .registrationLoginTextField)
         textField.returnKeyType = .continue
         return textField
     }()
@@ -53,7 +53,7 @@ final class RegistrationView: UIView {
     private let passwordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Придумайте надёжный пароль"
+        label.text = String(localized: .registrationPasswordLabel)
         label.textColor = .black
         return label
     }()
@@ -62,7 +62,7 @@ final class RegistrationView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Пароль"
+        textField.placeholder = String(localized: .registrationPasswordTextField)
         textField.returnKeyType = .continue
         return textField
     }()
@@ -70,7 +70,7 @@ final class RegistrationView: UIView {
     private let secondPasswordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Введите пароль повторно"
+        label.text = String(localized: .registrationSecondPasswordLabel)
         label.textColor = .black
         return label
     }()
@@ -79,7 +79,7 @@ final class RegistrationView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Пароль"
+        textField.placeholder = String(localized: .registrationPasswordTextField)
         textField.returnKeyType = .continue
         return textField
     }()
@@ -87,7 +87,7 @@ final class RegistrationView: UIView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Введите ваше имя"
+        label.text = String(localized: .registrationNameLabel)
         label.textColor = .black
         return label
     }()
@@ -96,7 +96,7 @@ final class RegistrationView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Имя"
+        textField.placeholder = String(localized: .registrationNameTextField)
         textField.returnKeyType = .continue
         return textField
     }()
@@ -104,7 +104,7 @@ final class RegistrationView: UIView {
     private let dateOfBirthLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Укажите вашу дату рождения"
+        label.text = String(localized: .registrationDateLabel)
         label.textColor = .black
         return label
     }()
@@ -121,7 +121,7 @@ final class RegistrationView: UIView {
     private let phoneNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Введите номер мобильного телефона"
+        label.text = String(localized: .registrationPhoneLabel)
         label.textColor = .black
         return label
     }()
@@ -130,7 +130,7 @@ final class RegistrationView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Телефон"
+        textField.placeholder = String(localized: .registrationPhoneTextField)
         textField.returnKeyType = .continue
         return textField
     }()
@@ -138,7 +138,7 @@ final class RegistrationView: UIView {
     private let emailLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Введите электронную почту"
+        label.text = String(localized: .registrationEmailLabel)
         label.textColor = .black
         return label
     }()
@@ -147,7 +147,7 @@ final class RegistrationView: UIView {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Элекронная почта"
+        textField.placeholder = String(localized: .registrationEmailTextField)
         textField.keyboardType = .emailAddress
         textField.returnKeyType = .done
         return textField
@@ -156,7 +156,7 @@ final class RegistrationView: UIView {
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Сохранить", for: .normal)
+        button.setTitle(String(localized: .save), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
@@ -263,7 +263,6 @@ final class RegistrationView: UIView {
             
             datePicker.topAnchor.constraint(equalTo: dateOfBirthLabel.bottomAnchor, constant: 20),
             datePicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            datePicker.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
             phoneNumberLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 30),
             phoneNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

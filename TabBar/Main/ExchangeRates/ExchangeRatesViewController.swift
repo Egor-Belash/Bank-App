@@ -86,25 +86,24 @@ final class ExchangeRatesViewController: UIViewController {
     private func setupTextIntoLabel() {
         label.isHidden = false
         guard let rate = rates.first else {
-            label.text = "Загрузка ..."
+            label.text = String(localized: .loading)
             return
         }
-                
-                
+        
         label.text = """
-        Курс на \(rate.kursDateTime)
+        \(String(localized: .exchangeRateOn(variableName: "\(rate.kursDateTime)")))
         
-                        Обмен валюты
+                        \(String(localized: .currencyExchange))
         
-        Валюта:        Покупка:        Продажа:
+        \(String(localized: .currency)):        \(String(localized: .buy)):        \(String(localized: .sell)):
         🇺🇸 USD:        \(rate.usdCardIn)        \(rate.usdCardOut)
         🇪🇺 EUR:        \(rate.eurCardIn)        \(rate.eurCardOut)
         🇷🇺 RUB:        \(rate.rubCardIn)        \(rate.rubCardOut)
         🇨🇳 CNY:        \(rate.cnyCardIn)        \(rate.cnyCardOut)
         
-                    Обмен иностранной валюты
+                    \(String(localized: .foreignCurrencyExchange))
         
-        Валюта:             Покупка:        Продажа:
+        \(String(localized: .currency)):             \(String(localized: .buy)):        \(String(localized: .sell)):
         🇺🇸USD–🇪🇺EUR:        \(rate.usdEurCardIn)        \(rate.usdEurCardOut)
         🇺🇸USD–🇷🇺RUB:        \(rate.usdRubCardIn)        \(rate.usdRubCardOut)
         🇷🇺RUB–🇪🇺EUR:        \(rate.rubEurCardIn)        \(rate.rubEurCardOut)

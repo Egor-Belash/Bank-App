@@ -7,17 +7,17 @@ final class LogInPresenter: LogInPresenterProtocol {
 
     func loginButtonTapped(_ login: String, _ password: String) {
         guard !login.isEmpty, !password.isEmpty else {
-            view?.showError(title: "Ошибка", message: "Введите логин и пароль")
+            view?.showError(title: String(localized: .error), message: String(localized: .loginEnterLoginAndPassword))
             return
         }
         
         guard let savedLogin = UserDefaults.standard.string(forKey: "login") else {
-            view?.showError(title: "Ошибка", message: "Пользователь не зарегистрирован")
+            view?.showError(title: String(localized: .error), message: String(localized: .loginUserIsNotRegistered))
             return
         }
         
         guard let savedPassword = KeychainService.shared.loadPasswordFromKeychain(login: savedLogin) else {
-            view?.showError(title: "Ошибка", message: "Пароль не найден")
+            view?.showError(title: String(localized: .error), message: String(localized: .loginIncorrectPassword))
             return
         }
         
@@ -28,7 +28,7 @@ final class LogInPresenter: LogInPresenterProtocol {
             // Go to the MainTabBarViewController
             router?.goToMainTabBarScreen()
         } else {
-            view?.showError(title: "Ошибка", message: "Неверный логин или пароль")
+            view?.showError(title: String(localized: .error), message: String(localized: .loginIncorrectLoginOrPassword))
         }
     }
 

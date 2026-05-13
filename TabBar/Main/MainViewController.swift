@@ -16,14 +16,13 @@ final class MainViewController: UIViewController {
     private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Main Screen"
         return label
     }()
     
     private let exchangeRatesButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Go to exchange rates", for: .normal)
+        button.setTitle(String(localized: .exchangeRates), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor(named: "yellowColor2")
@@ -38,7 +37,7 @@ final class MainViewController: UIViewController {
     private let newsButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("News", for: .normal)
+        button.setTitle(String(localized: .news), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = UIColor(named: "blueColor2")
@@ -105,7 +104,7 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: MainViewProtocol {
     func getUserName(name: String) {
-        label.text = "Hello, \(name)!"
+        label.text = String(localized: .greeting(variableName: name))
     }
     
 }

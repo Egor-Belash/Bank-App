@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		74218F162F7DA38100FB754A /* Extension+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74218F152F7DA38100FB754A /* Extension+VC.swift */; };
+		7429DC302FB501AE00F6EA45 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7429DC2F2FB501AE00F6EA45 /* Localizable.xcstrings */; };
 		745BFFA92F799D3C00D68BE6 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 745BFFA82F799D3C00D68BE6 /* Lottie */; };
 		746FF8B22FA6088100C3C58F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 746FF8B12FA6088100C3C58F /* Kingfisher */; };
 		74EE9E2F2FAB976500C52916 /* tz_mini_app.md in Resources */ = {isa = PBXBuildFile; fileRef = 74EE9E2E2FAB976500C52916 /* tz_mini_app.md */; };
@@ -15,6 +16,7 @@
 
 /* Begin PBXFileReference section */
 		74218F152F7DA38100FB754A /* Extension+VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+VC.swift"; sourceTree = "<group>"; };
+		7429DC2F2FB501AE00F6EA45 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		749878E02F792F6D00FABDB5 /* Bank App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bank App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74EE9E2E2FAB976500C52916 /* tz_mini_app.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = tz_mini_app.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +98,7 @@
 				746FF7262F9FC3D100C3C58F /* Services */,
 				74218F0D2F7D9FAC00FB754A /* TabBar */,
 				74218F152F7DA38100FB754A /* Extension+VC.swift */,
+				7429DC2F2FB501AE00F6EA45 /* Localizable.xcstrings */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +164,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 749878D72F792F6D00FABDB5;
 			minimizedProjectReferenceProxies = 1;
@@ -184,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74EE9E2F2FAB976500C52916 /* tz_mini_app.md in Resources */,
+				7429DC302FB501AE00F6EA45 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +271,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -322,6 +328,7 @@
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -331,6 +338,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -380,6 +388,7 @@
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

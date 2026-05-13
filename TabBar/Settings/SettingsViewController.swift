@@ -15,20 +15,26 @@ final class SettingsViewController: UIViewController {
     private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Settings"
+        label.text = String(localized: .settingsNavbarName)
         return label
     }()
     
     private let nightModeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Theme:"
+        label.text = String(localized: .settingsThemeLabel)
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
     
     private let nightModeSegment: UISegmentedControl = {
-        let segment = UISegmentedControl(items: ["System", "Light", "Dark"])
+        let segment = UISegmentedControl(
+            items: [
+                String(localized: .settingsThemeSegmentSystem),
+                String(localized: .settingsThemeSegmentLight),
+                String(localized: .settingsThemeSegmentDark)
+            ]
+        )
         segment.translatesAutoresizingMaskIntoConstraints = false
         segment.selectedSegmentIndex = 0
         return segment
@@ -37,11 +43,11 @@ final class SettingsViewController: UIViewController {
     private let notificationsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Enable notifications:"
+        label.text = String(localized: .settingsEnableNotificationLabel)
         label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
-    
+
     private let notificationSwitch: UISwitch = {
         let switcher = UISwitch()
         switcher.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +58,7 @@ final class SettingsViewController: UIViewController {
     private let logOutButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log out", for: .normal)
+        button.setTitle(String(localized: .settingsLogoutButton), for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
         button.layer.cornerRadius = 22
@@ -123,13 +129,13 @@ final class SettingsViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        title = "Settings"
+        title = String(localized: .settingsNavbarName)
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // MARK: – Actions
     @objc private func logOutButtonTapped() {
-        showWarningAlertBeforeExit(title: "Attention", message: "You are going to log out.\nAre you sure?")
+        showWarningAlertBeforeExit(title: String(localized: .settingsAttentionAlertTitle), message: String(localized: .settingsAttentionAlertMessage))
     }
     
     @objc private func nightModeSegmentChanged(_ segment: UISegmentedControl) {
@@ -143,8 +149,8 @@ final class SettingsViewController: UIViewController {
     private func showWarningAlertBeforeExit(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let logOutAction = UIAlertAction(title: "Log Out", style: .destructive) { [weak self] _ in
+        let cancelAction = UIAlertAction(title: String(localized: .settingsCancelAction), style: .cancel)
+        let logOutAction = UIAlertAction(title: String(localized: .settingsLogoutButton), style: .destructive) { [weak self] _ in
             self?.presenter?.logoutButtonTapped()
         }
         
@@ -172,14 +178,14 @@ extension SettingsViewController: SettingsViewProtocol {
     
     func showAlertToOpenSettings() {
         let alert = UIAlertController(
-            title: "Уведомления отключены",
-            message: "Разрешите уведомления в настройках устройства",
+            title: String(localized: .settingsOpenSettingsAlertTitle),
+            message: String(localized: .settingsOpenSettingsAlertMessage),
             preferredStyle: .alert
         )
         
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        alert.addAction(UIAlertAction(title: String(localized: .settingsCancelAction), style: .cancel))
 
-        alert.addAction(UIAlertAction(title: "Настройки", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: String(localized: .settingsNavbarName), style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url)
             }
