@@ -259,6 +259,91 @@
         }
       }
     },
+    "Notification_Message1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your balance is missing you. Top it up! 😢"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш баланс скучает без пополнения 😢"
+          }
+        }
+      }
+    },
+    "Notification_Message2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It looks like you forgot to spend your money 💳"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кажется, вы забыли потратить деньги 💳"
+          }
+        }
+      }
+    },
+    "Notification_Message3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The bank is so worried about your finances 🫣"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Банк переживает за ваши финансы 🫣"
+          }
+        }
+      }
+    },
+    "Notification_Message4" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Congratulations 🎉, you have a new debt"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поздравляем 🎉, у вас новый долг"
+          }
+        }
+      }
+    },
+    "Notification_Message5" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your wallet has become too light 🤨"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш кошелёк стал слишком лёгким 🤨"
+          }
+        }
+      }
+    },
     "OB_1Button" : {
       "extractionState" : "manual",
       "localizations" : {

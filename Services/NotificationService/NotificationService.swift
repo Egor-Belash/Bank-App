@@ -77,11 +77,10 @@ final class NotificationService {
     }
     
     let messages = [
-        "Ваш баланс скучает без пополнения 😢",
-        "Кажется, вы забыли потратить деньги 💳",
-        "Банк переживает за ваши финансы 🫣",
-        "Поздравляем 🎉, у вас новый долг",
-        "Ваш кошелёк стал слишком лёгким 🤨"
+        String(localized: .notificationMessage1),
+        String(localized: .notificationMessage2),
+        String(localized: .notificationMessage3),
+        String(localized: .notificationMessage4),
+        String(localized: .notificationMessage5)
     ]
-    
 }
