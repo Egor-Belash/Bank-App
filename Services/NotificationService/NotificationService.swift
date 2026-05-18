@@ -40,7 +40,7 @@ final class NotificationService {
             // Шаг 2: Формируем содержимое уведомления.
             let content = UNMutableNotificationContent()
             content.title = "💸 BankApp 💸"
-            content.body = self.messages.randomElement() ?? "Вы помните, какой банк лучший? 😎"
+            content.body = self.messages.randomElement() ?? String(localized: .notificationMessage6)
             content.sound = .defaultRingtone
             content.badge = 1
             

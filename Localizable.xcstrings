@@ -344,6 +344,23 @@
         }
       }
     },
+    "Notification_Message6" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you remember which bank is the best? 😎"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы помните, какой банк лучший? 😎"
+          }
+        }
+      }
+    },
     "OB_1Button" : {
       "extractionState" : "manual",
       "localizations" : {
