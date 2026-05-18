@@ -120,6 +120,7 @@
 				749878DC2F792F6D00FABDB5 /* Sources */,
 				749878DD2F792F6D00FABDB5 /* Frameworks */,
 				749878DE2F792F6D00FABDB5 /* Resources */,
+				74EF9FDF2FBB89F900CC07A8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -171,6 +172,7 @@
 			packageReferences = (
 				745BFFA72F799D3C00D68BE6 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				746FF8B02FA6088100C3C58F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				74EF9FE02FBB8EED00CC07A8 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 749878E12F792F6D00FABDB5 /* Products */;
@@ -194,6 +196,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		74EF9FDF2FBB89F900CC07A8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		749878DC2F792F6D00FABDB5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -214,6 +238,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NHXPFMPDFR;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bank App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -244,6 +269,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NHXPFMPDFR;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bank App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -431,6 +457,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.8.1;
+			};
+		};
+		74EF9FE02FBB8EED00CC07A8 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.63.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

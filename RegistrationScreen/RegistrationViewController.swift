@@ -161,4 +161,3 @@ extension RegistrationViewController: RegistrationViewProtocol {
     }
 
 }
-

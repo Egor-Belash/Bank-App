@@ -49,7 +49,6 @@ final class MainViewController: UIViewController {
         return button
     }()
 
-    
     // MARK: – Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,4 +107,3 @@ extension MainViewController: MainViewProtocol {
     }
     
 }
-

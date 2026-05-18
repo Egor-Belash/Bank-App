@@ -14,7 +14,6 @@ struct NewsModel: Codable {
     let startDate: String
     let link: String
     
-    
     enum CodingKeys: String, CodingKey {
         case nameRu = "name_ru"
         case htmlRu = "html_ru"
@@ -24,5 +23,3 @@ struct NewsModel: Codable {
     }
     
 }
-
-

@@ -136,7 +136,6 @@ extension NewsViewController: UITableViewDataSource {
         return cell
     }
     
-    
 }
 
 // MARK: – UITableViewDelegate

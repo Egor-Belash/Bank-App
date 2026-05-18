@@ -54,4 +54,3 @@ struct ExchangeRatesModel: Codable {
         case cnyRubCardOut = "CNYCARD_RUBCARD_out"
     }
 }
-

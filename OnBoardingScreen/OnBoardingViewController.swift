@@ -77,7 +77,7 @@ final class OnBoardingViewController: UIViewController {
         
         overrideUserInterfaceStyle = .light
     }
-    
+
     deinit {
         print("OndoardingVC is deinit")
     }
