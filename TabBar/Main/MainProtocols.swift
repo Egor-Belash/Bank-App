@@ -15,11 +15,9 @@ protocol MainPresenterProtocol: AnyObject {
     func viewDidLoad()
     func exchangeRatesTapped()
     func newsTapped()
-    func bankTapped()
 }
 
 protocol MainRouterProtocol: AnyObject {
     func openExchangeRates()
     func openNews()
-    func openBankLocation()
 }

@@ -14,12 +14,21 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func setupTabs() {
+        let mapVC = MapRouter.build()
         let mainVC = MainRouter.build()
         let settingsVC = SettingsRouter.build()
+        
+        let mapNavVC = UINavigationController(rootViewController: mapVC)
         let mainNavVC = UINavigationController(rootViewController: mainVC)
         let settingsNavVC = UINavigationController(rootViewController: settingsVC)
         
-        tabBarController?.selectedIndex = 0
+        selectedIndex = 1
+        
+        mapNavVC.tabBarItem = UITabBarItem(
+            title: String(localized: .map),
+            image: UIImage(systemName: "map"),
+            selectedImage: UIImage(systemName: "map.fill")
+        )
         
         mainNavVC.tabBarItem = UITabBarItem(
             title: String(localized: .tabBarNameMain),
@@ -33,6 +42,6 @@ final class MainTabBarViewController: UITabBarController {
             selectedImage: UIImage(systemName: "gear.fill")
         )
 
-        viewControllers = [mainNavVC, settingsNavVC]
+        viewControllers = [mapNavVC, mainNavVC, settingsNavVC]
     }
 }

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+final class MapPresenter: MapPresenterProtocol {
+    
+    weak var view: MapViewProtocol?
+    var router: MapRouterProtocol?
+    
+}

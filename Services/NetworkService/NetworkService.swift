@@ -38,6 +38,7 @@ final class NetworkService {
     
     // MARK: – Properties
     private let baseURL = "https://belarusbank.by/api"
+    private let bankLocationsURL = "https://belarusbank.by/open-banking/v1.0/banks/AKBBBY2X/branches"
     private let session: URLSession
     
     // MARK: – INIT
@@ -122,6 +123,45 @@ final class NetworkService {
                 let decoder = JSONDecoder()
                 let news = try decoder.decode([NewsModel].self, from: data)
                 completion(.success(news))
+            } catch {
+                completion(.failure(.decodingError(error)))
+            }
+        }
+        task.resume()
+    }
+    
+    // MARK: – BankMap (GCD подход (Completion Handler))
+    func fetchBankLocation(completion: @escaping (Result<[BranchData], NetworkError>) -> Void) {
+        guard let url = URL(string: bankLocationsURL) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        let task = session.dataTask(with: url) { data, response, error in
+            if let error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(.httpError(statusCode: httpResponse.statusCode)))
+                return
+            }
+            
+            guard let data else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(MapModel.self, from: data)
+                completion(.success(response.data.bank.branch))
             } catch {
                 completion(.failure(.decodingError(error)))
             }

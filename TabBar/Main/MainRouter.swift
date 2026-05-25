@@ -34,8 +34,4 @@ final class MainRouter: MainRouterProtocol {
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 
-    func openBankLocation() {
-        let vc = BankLocationRouter.build()
-        viewController?.navigationController?.pushViewController(vc, animated: true)
-    }
 }

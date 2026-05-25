@@ -28,10 +28,6 @@ final class MainPresenter: MainPresenterProtocol {
     func newsTapped() {
         router?.openNews()
     }
-
-    func bankTapped() {
-        router?.openBankLocation()
-    }
     
     // MARK: – Privates
     private func getUserName() {
