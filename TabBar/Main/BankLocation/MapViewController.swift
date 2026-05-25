@@ -1,7 +1,7 @@
 import UIKit
 import MapKit
 
-final class BankLocationViewController: UIViewController {
+final class MapViewController: UIViewController {
     
     // MARK: – Properties
     
