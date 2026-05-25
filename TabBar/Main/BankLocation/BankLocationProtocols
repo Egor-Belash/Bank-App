@@ -1,0 +1,13 @@
+import Foundation
+
+protocol BankLocationViewProtocol: AnyObject {
+
+}
+
+protocol BanKLocationPresenterProtocol: AnyObject {
+
+}
+
+protocol BankLocationRouterProtocol: AnyObject {
+
+}
