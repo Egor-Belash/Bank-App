@@ -12,6 +12,7 @@ final class MapViewController: UIViewController {
     
     // MARK: – Properties
     var presenter: MapPresenterProtocol?
+    private var banks = [PlaceAnnotation] = []
     
     // MARK: – Subviews
     private let mapView: MKMapView = {
@@ -21,6 +22,13 @@ final class MapViewController: UIViewController {
         mapView.showsScale = true
         return mapView
     }()
+
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
     
     // MARK: – Lifecycles
     override func viewDidLoad() {
@@ -28,6 +36,8 @@ final class MapViewController: UIViewController {
         setupViewProperties()
         setupSubviews()
         setupConstraints()
+
+        presenter?.viewDidLoad()
     }
     
     // MARK: – Layout
@@ -38,6 +48,7 @@ final class MapViewController: UIViewController {
     
     private func setupSubviews() {
         view.addSubview(mapView)
+        view.addSubview(activityIndicator)
     }
     
     private func setupConstraints() {
@@ -46,15 +57,30 @@ final class MapViewController: UIViewController {
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200),
-            
+
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
+    }
+
+    // MARK: - Actions
+    private func addAllAnnotations() {
+        // MKUserLocation — системная аннотация синей точки геолокации пользователя.
+        // Фильтруем её, чтобы не удалить/не задублировать случайно.
+        let existing = mapView.annotations.filter { !($0 is MKUserLocation) }
+        mapView.removeAnnotations(existing)
+
+        mapView.addAnnotations(banks)
+        mapView.showAnnotations(banks, animated: true)
     }
     
 }
 
 // MARK: – MapViewProtocol
 extension MapViewController: MapViewProtocol {
-    
+    func showBanks(_ banks: [PlaceAnnotation]) {
+        addAllAnnotations()
+    }
 }
 
 // MARK: – MKMapViewDelegate

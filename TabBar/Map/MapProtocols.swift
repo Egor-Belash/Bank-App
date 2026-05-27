@@ -8,11 +8,11 @@
 import Foundation
 
 protocol MapViewProtocol: AnyObject {
-    
+    func showBanks(_ banks: [PlaceAnnotation])
 }
 
 protocol MapPresenterProtocol: AnyObject {
-    
+    func viewDidLoad()
 }
 
 protocol MapRouterProtocol: AnyObject {
