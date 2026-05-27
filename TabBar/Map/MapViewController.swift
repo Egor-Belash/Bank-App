@@ -12,7 +12,7 @@ final class MapViewController: UIViewController {
     
     // MARK: – Properties
     var presenter: MapPresenterProtocol?
-    private var banks = [PlaceAnnotation] = []
+    private var banks: [PlaceAnnotation] = []
     
     // MARK: – Subviews
     private let mapView: MKMapView = {
@@ -20,6 +20,8 @@ final class MapViewController: UIViewController {
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.showsCompass = true
         mapView.showsScale = true
+        mapView.tintColor = .systemGray5
+        mapView.isHidden = true
         return mapView
     }()
 
@@ -30,6 +32,26 @@ final class MapViewController: UIViewController {
         return activityIndicator
     }()
     
+    private let label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let reloadButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
+        button.setTitle("Try again", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        button.layer.cornerRadius = 25
+        button.isHidden = true
+        return button
+    }()
+    
     // MARK: – Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +59,7 @@ final class MapViewController: UIViewController {
         setupSubviews()
         setupConstraints()
 
+        activityIndicator.startAnimating()
         presenter?.viewDidLoad()
     }
     
@@ -49,6 +72,10 @@ final class MapViewController: UIViewController {
     private func setupSubviews() {
         view.addSubview(mapView)
         view.addSubview(activityIndicator)
+        view.addSubview(label)
+        view.addSubview(reloadButton)
+        
+        reloadButton.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -60,10 +87,23 @@ final class MapViewController: UIViewController {
 
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            label.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 10),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            reloadButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
+            reloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reloadButton.widthAnchor.constraint(equalToConstant: 100),
+            reloadButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 
     // MARK: - Actions
+    @objc private func reloadButtonTapped() {
+        showLoading()
+        presenter?.viewDidLoad()
+    }
+    
     private func addAllAnnotations() {
         // MKUserLocation — системная аннотация синей точки геолокации пользователя.
         // Фильтруем её, чтобы не удалить/не задублировать случайно.
@@ -78,7 +118,36 @@ final class MapViewController: UIViewController {
 
 // MARK: – MapViewProtocol
 extension MapViewController: MapViewProtocol {
-    func showBanks(_ banks: [PlaceAnnotation]) {
+    func showLoading() {
+        activityIndicator.startAnimating()
+        reloadButton.isHidden = true
+        label.isHidden = true
+    }
+    
+    func showError(_ message: String) {
+        activityIndicator.stopAnimating()
+        reloadButton.isHidden = false
+        label.isHidden = false
+        label.text = message
+    }
+    
+    func showBanks(_ coordinates: [(Double, Double)]) {
+        
+        banks.removeAll()
+        
+        for coordinate in coordinates {
+            let annotation = PlaceAnnotation.init(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: coordinate.0,
+                    longitude: coordinate.1
+                )
+            )
+            banks.append(annotation)
+        }
+        
+        mapView.isHidden = false
+        activityIndicator.stopAnimating()
+        label.isHidden = true
         addAllAnnotations()
     }
 }

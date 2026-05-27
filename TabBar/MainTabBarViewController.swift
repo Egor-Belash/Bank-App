@@ -22,8 +22,6 @@ final class MainTabBarViewController: UITabBarController {
         let mainNavVC = UINavigationController(rootViewController: mainVC)
         let settingsNavVC = UINavigationController(rootViewController: settingsVC)
         
-        selectedIndex = 1
-        
         mapNavVC.tabBarItem = UITabBarItem(
             title: String(localized: .map),
             image: UIImage(systemName: "map"),
@@ -43,5 +41,7 @@ final class MainTabBarViewController: UITabBarController {
         )
 
         viewControllers = [mapNavVC, mainNavVC, settingsNavVC]
+        
+        selectedIndex = 1
     }
 }
