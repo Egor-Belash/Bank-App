@@ -24,6 +24,9 @@ struct BranchData: Codable {
 }
 
 struct PostalAddress: Codable {
+    let streetName: String?
+    let buildingNumber: String?
+    let addressLine: [String]?
     let geolocation: Geolocation?
 }
 

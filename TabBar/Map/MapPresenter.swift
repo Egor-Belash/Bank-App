@@ -27,7 +27,7 @@ final class MapPresenter: MapPresenterProtocol {
                 switch result {
                 case .success(let bankLocations):
                     let coordinates = self?.getData(bankLocations)
-                    self?.view?.showBanks(coordinates ?? [])
+                    self?.view?.showBanks(coordinates ?? [])        // переименовать coordinates
                     
                 case .failure(let error):
                     self?.view?.showError("Failed to fetch data:\n\(error.localizedDescription)")
@@ -36,16 +36,19 @@ final class MapPresenter: MapPresenterProtocol {
         }
     }
     
-    private func getData(_ data: [BranchData]) -> [(Double, Double)] {
-        var result: [(Double, Double)] = []
+    private func getData(_ data: [BranchData]) -> [(Double, Double, String)] {
+        var result: [(Double, Double, String)] = []
         
         for branch in data {
-            guard let geolocation = branch.postalAddress.geolocation,
+            guard let geolocation = branch.postalAddress.geolocation, // это удалить?
                   let latitude = Double(geolocation.latitude),
-                  let longitude = Double(geolocation.longitude)
+                  let longitude = Double(geolocation.longitude),
+                  let streetName = branch.postalAddress.streetName,
+                  let buildingNumber = branch.postalAddress.buildingNumber
             else { continue }
             
-            result.append((latitude, longitude))
+            let address = streetName + buildingNumber
+            result.append((latitude, longitude, address))
         }
         return result
     }

@@ -9,8 +9,12 @@ import UIKit
 import MapKit
 final class PlaceAnnotation: NSObject, MKAnnotation {
     let coordinate: CLLocationCoordinate2D
+    let title: String?
+    let subtitle: String?
 
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
+        self.title = title
+        self.subtitle = subtitle
     }
 }

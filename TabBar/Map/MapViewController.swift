@@ -131,7 +131,7 @@ extension MapViewController: MapViewProtocol {
         label.text = message
     }
     
-    func showBanks(_ coordinates: [(Double, Double)]) {
+    func showBanks(_ coordinates: [(Double, Double, String)]) {
         
         banks.removeAll()
         
@@ -140,7 +140,9 @@ extension MapViewController: MapViewProtocol {
                 coordinate: CLLocationCoordinate2D(
                     latitude: coordinate.0,
                     longitude: coordinate.1
-                )
+                ),
+                title: coordinate.2,
+                subtitle: "Пункт обслуживания банка"
             )
             banks.append(annotation)
         }
@@ -148,6 +150,7 @@ extension MapViewController: MapViewProtocol {
         mapView.isHidden = false
         activityIndicator.stopAnimating()
         label.isHidden = true
+        
         addAllAnnotations()
     }
 }
