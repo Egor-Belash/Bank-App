@@ -12,7 +12,7 @@ final class PlaceAnnotation: NSObject, MKAnnotation {
     let title: String?
     let subtitle: String?
 
-    init(coordinate: CLLocationCoordinate2D) {
+    init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?) {
         self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle

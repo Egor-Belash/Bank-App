@@ -40,7 +40,7 @@ final class MapPresenter: MapPresenterProtocol {
         var result: [(Double, Double, String)] = []
         
         for branch in data {
-            guard let geolocation = branch.postalAddress.geolocation, // это удалить?
+            guard let geolocation = branch.postalAddress.geolocation,
                   let latitude = Double(geolocation.latitude),
                   let longitude = Double(geolocation.longitude),
                   let streetName = branch.postalAddress.streetName,

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MapViewProtocol: AnyObject {
-    func showBanks(_ coordinates: [(Double, Double)])
+    func showBanks(_ coordinates: [(Double, Double, String)])
     func showError(_ message: String)
     func showLoading()
 }
